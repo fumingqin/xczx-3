@@ -373,10 +373,6 @@
 						url: '/pages/Home/wxAuthorize',
 					})
 					// #endif
-				} else {
-					uni.navigateTo({
-						url: that.$GrzxInter.Route.personal.url,
-					})
 				}
 				//#endif
 				// ---------------H5--------------
@@ -392,10 +388,6 @@
 					setTimeout(function() {
 						that.$GrzxInter.navToHome();//返回首页
 					}, 500);
-				} else {
-					uni.navigateTo({
-						url: that.$GrzxInter.Route.personal.url,
-					})
 				}
 				//#endif
 			},
