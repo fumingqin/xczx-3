@@ -9,7 +9,7 @@
 			
 			<!-- #ifndef H5 -->  <!--除了公众号 头像，背景图 --> 
 			<image v-if="backImg!=''" class="bg" :src="backImg||'/static/GRZX/backImg.png'" mode="aspectFill" name="backImg"></image>
-			<view v-if="backImg==''" class="bg bc_GRZX" name="backImg"></view>
+			<view v-if="backImg==''" class="bg" name="backImg"></view>
 			
 			<image class="tx" :src="portrait||'/static/GRZX/missing-face.png'" name="portrait" @click="getPhoto"></image>
 			<button class="xgbg"  plain="" @click="reviseBackground">修改背景</button>
@@ -406,6 +406,7 @@
 			width: 100%;
 			height: 500upx;
 			filter: blur(0.5px);
+			background:linear-gradient(-36deg,rgba(255,255,255,1) 0%,rgba(251,121,101,1) 0%,rgba(249,90,118,1) 100%);
 			// opacity: .7;
 		}
 		.tx{
