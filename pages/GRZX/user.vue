@@ -57,7 +57,7 @@
 			return {
 				applyName:'',   //应用名称
 				
-				QQ: '2482547782', 		//qq客服
+				QQ: '1882547782', 		//qq客服
 				nickname: '', 	//昵称
 				port: '', 		//头像
 				advert: '', 	//广告
