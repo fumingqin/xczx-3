@@ -10,14 +10,14 @@
 					<!-- 时间-价格 -->
 					<view class="ticketContent">
 						<view class="textCLass" style="font-size: 28upx;color: #333333;">{{turnDate(ticketDetail.setTime)}}出发</view>
-						<view class="textCLass" style="font-size: 28upx;color: #FC4646;">全票￥{{ticketDetail.fare}}</view>
+						<view class="textCLass" style="font-size: 28upx;color: #ff961e;">全票￥{{ticketDetail.fare}}</view>
 					</view>
 					<!-- 站点-余票 -->
 					<view class="ticketContent">
 						<view class="textCLass" style="font-size: 32upx;color: #333333;">{{ticketDetail.lineName}}</view>
 						<!-- <view class="textCLass" style="font-size: 32upx;color: #333333;">{{ticketDetail.startStaion}}→
 							{{ticketDetail.endStation}}</view> -->
-						<view class="textCLass" style="font-size: 28upx;color: #FC4646;">半票￥{{ticketDetail.halfTicket}}</view>
+						<view class="textCLass" style="font-size: 28upx;color: #ff961e;">半票￥{{ticketDetail.halfTicket}}</view>
 						
 					</view>
 					<!-- 车型-儿童半价 -->
@@ -193,7 +193,7 @@
 		</scroll-view>
 		<view class="toPayClass">
 			<view style="display: flex;align-items: center;margin-left: 32upx;">
-				<text style="font-size: 38upx;color: #FC4646;padding: 0;">￥{{totalPrice}}</text>
+				<text style="font-size: 38upx;color: #FC4B4B;padding: 0;">￥{{totalPrice}}</text>
 				<text style="font-size: 28upx;margin-left: 9upx;font-family:SourceHanSansSC-Light; font-weight: lighter;color: #666666;padding: 0;">共{{passengerNum}}人</text>
 			</view>
 			<view @tap="reserveTap" class="orderReserve" :class="{tapColor:selectedValue == 1}">立即预定</view>
@@ -893,7 +893,7 @@
 	.headerClass {
 		width: 100%;
 		height: 140upx;
-		background: #FC4646;
+		background: #ff961e;
 	}
 
 	//订单提交通用块
@@ -944,7 +944,7 @@
 		.Co_text2 {
 			margin-top: 8upx;
 			float: right;
-			color: #f85e52;
+			color: #ff961e;
 			font-size: 28upx;
 		}
 	}
@@ -1035,7 +1035,7 @@
 
 		.title {
 			font-size: 32upx;
-			color: #f85e52;
+			color: #ff961e;
 			margin-bottom: 10upx;
 		}
 
@@ -1056,7 +1056,7 @@
 
 		.price {
 			font-size: 44upx;
-			color: #f85e52;
+			color: #ff961e;
 
 			&:before {
 				content: '￥';
@@ -1173,7 +1173,7 @@
 		text-align: center;
 
 		&.tapColor {
-			background: #FC4646;
+			background: #ff961e;
 		}
 	}
 

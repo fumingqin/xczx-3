@@ -227,7 +227,7 @@
 							 @click="selectPassenger">
 								<view style="flex-direction: row;align-items: center;justify-content: center;" v-for="(item,index) in Passenger"
 								 :key="index">
-									<text style="font-size: 28rpx;">{{item.userName}} </text>
+									<text style="font-size: 28rpx;color: #color: #FFB22B;;">{{item.userName}} </text>
 									<text v-if="index!=(Passenger.length-1)">,</text>
 								</view>
 								<uni-icons type="arrowright" size="19"></uni-icons>
@@ -256,7 +256,7 @@
 							</view>
 						</view>
 						<view style="margin-top: 40rpx;align-items: center;">
-							<button @click="promptlyCall" style="width: 640rpx;height: 84rpx;background-color:#FC4646;border-radius:12rpx;border-color:#FC4646;line-height: 84rpx;">
+							<button @click="promptlyCall" style="width: 640rpx;height: 84rpx;background-color:#FFB22B;border-radius:12rpx;border-color:#FFB22B;line-height: 84rpx;">
 								<text style="color: #FFFFFF;font-size: 34rpx;">立即呼叫</text>
 							</button>
 						</view>
@@ -956,11 +956,11 @@
 					},
 					callout: {
 						content: '在这上车',
-						color: '#000000',
+						color: '#FFB22B',
 						fontSize: 10,
 						borderRadius: 4,
 						borderWidth: 1,
-						borderColor: '#333300',
+						borderColor: '#FFB22B',
 						bgColor: '#FFFFFF',
 						padding: '5',
 						display: 'ALWAYS'
@@ -982,11 +982,11 @@
 					},
 					callout: {
 						content: '在这下车',
-						color: '#000000',
+						color: '#FFB22B',
 						fontSize: 10,
 						borderRadius: 4,
 						borderWidth: 1,
-						borderColor: '#333300',
+						borderColor: '#FFB22B',
 						bgColor: '#FFFFFF',
 						padding: '5',
 						display: 'ALWAYS'
@@ -1102,7 +1102,7 @@
 							width: 6,
 							arrowLine: true,
 							// arrowIconPath:'../../static/CZC/jiantou.png',
-							color: '#4bdc27',
+							color: '#55007f',
 							borderColor: "#8c918b",
 						};
 						that.polyline.push(obj);
@@ -1348,7 +1348,7 @@
 	}
 
 	.bt_text {
-		color: #FC4646;
+		color: #FFB22B;
 	}
 
 	.bluering {
