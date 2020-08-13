@@ -36,14 +36,14 @@
 					});
 				}else if(e==1){
 					uni.switchTab({
-						url:'../../../pages/Home/Index'
+						url:'../../../pages/Home/zy_zhcx'
 					});
 				}
 			},
 			backHome : function() {
 				this.timeout=setTimeout(() => { 
 					uni.switchTab({
-						url:'../../../pages/Home/Index'
+						url:'../../../pages/Home/zy_zhcx'
 					});
 				}, 10000)
 			}
@@ -63,7 +63,7 @@
 		position: absolute;
 		width: 100%;
 		height: 320upx;
-		background-color: #FC4646;
+		background-color: #FFB22B;
 	
 	}
 
@@ -110,7 +110,7 @@
 				width: 280upx;
 				height: 104upx;
 				font-size: 34upx;
-				background: #FC4646;
+				background: #FFB22B;
 				border-radius: 16upx;
 				color: #fff;
 			}
@@ -121,8 +121,8 @@
 				height: 104upx;
 				font-size: 34upx;
 				border-radius: 16upx;
-				color: #FC4646;
-				border: 1px solid #FC4646;
+				color: #FFB22B;
+				border: 1px solid #FFB22B;
 			}
 		}
 

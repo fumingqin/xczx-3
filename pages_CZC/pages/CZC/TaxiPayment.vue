@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view style="background-color: #FC4646;">
+		<view style="background-color: #FFB22B;">
 			<view class="status_bar"></view>
 			<view style="height: 220rpx;">
 				<image class="backImage" @click="back" src="../../static/CZC/back.png" style="width: 80rpx;height: 80rpx;margin-left: 30rpx;"></image>
@@ -60,7 +60,7 @@
 				</radio-group>
 			</view> -->
 			<view style="margin-top: 20rpx;">
-				<button style="width: 100%;height: 100rpx;background-color: #FE4644;color: #FFFFFF;" @click="getPaymentInformation">
+				<button style="width: 100%;height: 100rpx;background-color: #FFB22B;color: #FFFFFF;" @click="getPaymentInformation">
 					<text style="font-size:34rpx;font-family:Source Han Sans SC;font-weight:400;color:#FFFFFF;">立即支付</text>
 				</button>
 			</view>
