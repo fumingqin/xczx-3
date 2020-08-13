@@ -1,7 +1,7 @@
 <template>
 	<view class="content" v-bind:style="{height:imgHeight+'px'}">
 		<!-- 背景图 -->
-		<image :src="background" class="backClass"></image>
+		<!-- <image :src="background" class="backClass"></image> -->
 		<image src="../../static/GRZX/loginReturn.png" class="returnClass" @click="returnClick"></image>
 
 		<view class="inputContent">
@@ -22,17 +22,15 @@
 		</view>
 
 		<!-- logo -->
-		<image :src="logo" class="logoClass"></image>
+		<image src="../../static/GRZX/logo.png" class="logoClass"></image>
 
 		<!-- 第三方登录 -->
-		<view class="loginMode">第三方登录</view>
+	<!-- 	<view class="loginMode">第三方登录</view>
 		<view class="leftLine"></view>
 		<view class="rightLine"></view>
-		<!-- <image src="../../static/GRZX/qqLogo.png" class="qqClass" @click="qqLogin"></image> -->
-		<!-- 苹果登录 -->
 		<image src="../../static/GRZX/appleLogo.png" class="appleClass" @click="appleLogin" v-if="platform=='ios'"></image>
 		<image src="../../static/GRZX/wxLogo.png" class="wxClass" @click="wxLogin" v-if="platform=='ios'"></image>
-		<image src="../../static/GRZX/wxLogo.png" class="wxClass1" v-if="platform!='ios'" @click="wxLogin" ></image>
+		<image src="../../static/GRZX/wxLogo.png" class="wxClass1" v-if="platform!='ios'" @click="wxLogin" ></image> -->
 	</view>
 </template>
 
@@ -86,9 +84,9 @@
 				that.$ChangeImage.GetImage("南平综合出行", "南平背景图").then(function(data) {
 					that.background = data;
 				});
-				that.$ChangeImage.GetImage("南平综合出行", "nanpinglogo").then(function(data) {
-					that.logo = data;
-				});
+				// that.$ChangeImage.GetImage("南平综合出行", "nanpinglogo").then(function(data) {
+				// 	that.logo = data;
+				// });
 			},
 
 			//----------------------------------加载页面高度----------------------------------
@@ -711,6 +709,7 @@
 	.content {
 		width: 100%;
 		position: relative;
+		background:linear-gradient(-36deg,rgba(255,255,255,1) 0%,rgba(251,121,101,1) 0%,rgba(249,90,118,1) 100%);
 	}
 
 	.backClass {
@@ -761,7 +760,7 @@
 		//登录区域的样式
 		width: 90.4%;
 		//height: 874upx;
-		height: 800upx;
+		height: 650upx;
 		position: absolute;
 		top: 324upx;
 		left: 4.8%;
@@ -885,8 +884,8 @@
 
 	.style1 {
 		//获取验证码
-		border: 1px solid #FF971E; //南平综合出行：#FF971E
-		color: #FF971E; //绿色：#65C36D
+		border: 1px solid #ED1C24; //南平综合出行：#FF971E
+		color: #ED1C24; //绿色：#65C36D
 	}
 
 	.style2 {
@@ -910,7 +909,8 @@
 		width: 90%;
 		padding: 25upx 0;
 		border-radius: 20upx;
-		background: linear-gradient(54deg, rgba(255, 128, 8, 1) 0%, rgba(255, 200, 55, 1) 100%); //南平综合出行
+		background:linear-gradient(-36deg,rgba(255,255,255,1) 0%,rgba(251,121,101,1) 0%,rgba(249,90,118,1) 100%);
+		//background: linear-gradient(54deg, rgba(255, 128, 8, 1) 0%, rgba(255, 200, 55, 1) 100%); //南平综合出行
 		//background: linear-gradient(54deg, rgba(53, 199, 98, 1) 0%, rgba(6, 161, 54, 1) 100%); //漳州达达通
 	}
 </style>

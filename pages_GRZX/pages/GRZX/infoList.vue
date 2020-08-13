@@ -1,9 +1,8 @@
-<!-- 乡村振兴  第一版 -->
 <template>
 	<view>	
 		<!-- 常用乘车人 -->
-		<view v-if="type==1 && state==1" class="mt">
-			<view class="boxClass" v-for="(item, index) in passengerList" :key="index" @click="editPassenger(item)">  <!--个人中心页面进入 -->
+		<view class="mt">
+			<view class="boxClass" v-for="(item, index) in passengerList" :key="index">  <!--个人中心页面进入 -->
 				<view class="nameClass">{{item.userName}}</view>
 				<view class="sexClass">{{item.userSex}}</view>
 				<view class="codeClass fontStyle">证件号</view>
@@ -15,99 +14,14 @@
 					<text style="font-size: 24upx;color: #2C2D2D;line-height: 57upx;margin-left: 20upx;">{{item.userauditState}}</text>
 					<text v-if="item.userDefault==true" class="fontClass" style="width: 80upx;">本人</text>
 				</view>
-				<view class="btnRight">
-					<image src="../../static/GRZX/btnRight.png" style="width: 100%;height: 100%;"></image>
-				</view>
+				<image v-if="state==1" src="../../static/GRZX/edit.png" @click="editPassenger(item)" class="commonClass"></image>
+				<image v-if="state==2" src="../../static/GRZX/deletePassenger.png" @click="deletePassengers(item)" class="commonClass"></image>
 			</view>
 		</view>
-		<view v-if="type==1 && state==1" class="btnBox">
+		<view class="btnBox">
 			<button @click="addPassenger" class="btnAdd btn_background btn_fontColor">+添加乘客</button>
 		</view>	
 		
-		<view v-if="type==1 && state==2" class="mt">
-			<view class="boxClass" v-for="(item, index) in passengerList" :key="index" @click="selete(item)">  <!--个人中心页面进入 -->
-				<view class="nameClass">{{item.userName}}</view>
-				<view class="sexClass">{{item.userSex}}</view>
-				<view class="codeClass fontStyle">身份证</view>
-				<view class="codeNumClass fontStyle">{{item.userCodeNum}}</view>
-				<view class="phoneClass fontStyle">联系电话</view>
-				<view class="phoneNumClass fontStyle">{{item.userPhoneNum}}</view>
-				<view class="redBox">
-					<view class="typeClass">{{item.userType}}</view>
-					<text style="font-size: 24upx;color: #2C2D2D;line-height: 57upx;margin-left: 20upx;">{{item.userauditState}}</text>
-					<text v-if="item.userDefault==true" class="fontClass" style="width: 80upx;">本人</text>
-				</view>
-				<view v-if="item.deleteIndex==0" class="btnCheck"> 
-					<image src="../../static/GRZX/btnUncheck.png" style="width: 100%;height: 100%;"></image>
-				</view>
-				<view v-if="item.deleteIndex==1" class="btnCheck"> 
-					<image src="../../static/GRZX/btnCheck.png" style="width: 100%;height: 100%;"></image>
-				</view>
-			</view>
-		</view>
-		<view v-if="type==1 && state==2" class="btnBox">
-			<button @click="deletePassenger" class="btnAdd btn_background btn_fontColor">删除</button>
-		</view>
-		
-		<!-- <view v-if="type==1" class="navClass" >
-			<view class="passengerClass1" @click="passengerClick">
-				<text class="textClass">常用出行人</text>
-				<view class="lineClass"></view>
-			</view>
-			<view class="addressClass1" @click="addressClick"><text class="textClass">常用地址</text></view>
-		</view> -->
-		
-		<!-- 常用地址 -->
-		
-		<view v-if="type==2 && state==1" class="m-l">
-			<view class="boxClass1" v-for="(item, index) in addressList" :key="index" @click="editAddress(item)">  <!--非个人中心页面进入 -->
-				<view class="nameClass1">{{item.receiver}}</view>
-				<view class="postalCodeClass">{{item.postalCode}}</view>
-				<view class="fontStyle1" style="top:101upx;">手机号码：{{item.phoneNum}}</view>
-				<view class="fontStyle1" style="top:158upx;">所在地区：{{item.district}}</view>
-				<view class="fontStyle1" style="top:216upx;">详细地址：{{item.detailAddress}}</view>
-				<view class="editClass">
-					<image src="../../static/GRZX/btnRight.png" class="btnRight1"></image>
-				</view>
-				
-				<view v-if="item.default">
-					<image src="../../static/GRZX/defaultAddress.png" class="defaultClass"></image>
-				</view>
-			</view>
-		</view>	
-		<view v-if="type==2 && state==1" class="btnBox"> 
-			<button @click="addAddress" class="btnAdd btn_background btn_fontColor">+添加邮寄地址</button>
-		</view>	
-		
-		<view v-if="type==2 && state==2" class="m-l">
-			<view class="boxClass1" v-for="(item, index) in addressList" :key="index" @click="selete(item)">  <!--非个人中心页面进入 -->
-				<view class="nameClass1">{{item.receiver}}</view>
-				<view class="postalCodeClass">{{item.postalCode}}</view>
-				<view class="fontStyle1" style="top:101upx;">手机号码：{{item.phoneNum}}</view>
-				<view class="fontStyle1" style="top:158upx;">所在地区：{{item.district}}</view>
-				<view class="fontStyle1" style="top:216upx;">详细地址：{{item.detailAddress}}</view>
-				<view v-if="item.deleteIndex==0" class="btnCheck1">
-					<image src="../../static/GRZX/btnUncheck.png" style="width: 100%;height: 100%;"></image>
-				</view>
-				<view v-if="item.deleteIndex==1" class="btnCheck1"> 
-					<image src="../../static/GRZX/btnCheck.png" style="width: 100%;height: 100%;"></image>
-				</view>
-				
-				<view v-if="item.default">
-					<image src="../../static/GRZX/defaultAddress.png" class="defaultClass"></image>
-				</view>
-			</view>
-		</view>	
-		<view v-if="type==2 && state==2" class="btnBox">
-			<button @click="deleteAddress" class="btnAdd btn_background btn_fontColor">删除</button>
-		</view>
-		<view v-if="type==2" class="navClass" >
-			<view class="passengerClass2" @click="passengerClick"><text class="textClass">常用出行人</text></view>
-			<view class="addressClass2" @click="addressClick">
-				<text class="textClass">常用地址</text>
-				<view class="lineClass"></view>
-			</view>
-		</view>
 		<view class="topClass">
 			<!-- #ifndef MP-WEIXIN -->
 			<text class="titleClass">常用信息设置</text>
@@ -128,7 +42,6 @@
 	        return {
 				applyName:'',   //应用名称
 				
-				type:1,  		//切换tab
 				state:1,		 //1管理， 2完成
 				passengerList:[], 	//乘客列表
 				addressList:[],		//地址列表
@@ -316,6 +229,44 @@
 				uni.redirectTo({
 					url:this.$GrzxInter.Route.addAddress.url+'?type=edit',
 				})
+			},
+			
+			// --------------------------------删除单个乘车人信息--------------------------------
+			deletePassengers(item){
+				uni.showModal({
+					title:'友情提醒',
+				    content: '确定删除这些乘客信息？',
+				    success: (e)=>{
+				    	if(e.confirm){
+							uni.request({
+								url:this.$GrzxInter.Interface.deletuserInfoList.value,
+								data:{
+									userId:this.userId,
+									passengerId:item.passengerId,
+								},
+								method:this.$GrzxInter.Interface.deletuserInfoList.method,
+								success:res => {
+									if(res.data.status&&res.data.msg=='删除成功'){
+										uni.showToast({
+											title:'删除成功！',
+											icon:'none',
+										})
+									}
+									setTimeout(()=>{
+										uni.redirectTo({
+											url:this.$GrzxInter.Route.infoList.url,
+										})
+									}, 100);
+								}
+							})
+						}else{
+							uni.showToast({
+								icon:'none',
+								title:'已取消',
+							})
+						}
+				    }
+				});
 			},
 			
 			// --------------------------------删除乘车人信息--------------------------------
@@ -769,5 +720,12 @@
 		position: absolute;
 		left: 88%;
 		top:115upx;
+	}
+	.commonClass{
+		position: absolute;
+		top:95upx;
+		right: 5%;
+		width: 45upx;
+		height: 45upx;
 	}
 </style>

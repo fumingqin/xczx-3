@@ -1,8 +1,6 @@
 <template>
 	<view class="content">
-		<view class="backImg">
-			<!-- 顶部背景图 -->
-			
+		<view class="backImg1">
 			<!-- #ifdef APP-PLUS -->
 			<image src="../../static/GRZX/set.png" class="setClass" @click="navTo('set')"></image>
 			<image src="../../static/GRZX/info.png" class="infoClass" @click="navTo('myNews')"></image>
@@ -14,113 +12,38 @@
 				<image class="portraitClass" :src="port || '/static/GRZX/missing-face.png'"></image>
 				<view class="usernameClass" style="display: flex;flex-direction: column;">
 					<view><text>{{nickname}}</text></view>
-					<view class="userTypeBox" v-if="nickname != '游客'">
-						<!-- <image src="../../static/GRZX/huangguan.png" class="iconClass bc_GRZX_UserType"></image> -->
-						<text class="typeBox bc_GRZX_UserType" >普通用户</text>
-					</view>
-				</view>
-			</view>
-						
-			<!-- 个人主页按钮 -->
-			<!-- <view class="grzyClass" @click="checkLogin">
-				<text>个人主页</text>
-				<image src="../../static/GRZX/btnRight_Home.png" class="rightClass"></image>
-			</view> -->
-			
-			<!-- 订单链接按钮 -->
-			<view class="myBox">
-				<view class="collection" @click="orderClick(3)" hover-class="btn_Click">
-					<image src="../../static/GRZX/tubiao_pay1.png" class="imgStyle1" mode="aspectFill"></image>
-					<text class="myFont">待支付</text>
-				</view>
-				<view class="order" @click="orderClick(2)" hover-class="btn_Click">
-					<image src="../../static/GRZX/tubiao_pay2.png" class="imgStyle2" mode="aspectFill"></image>
-					<text class="myFont">进行中</text>
-				</view>
-				<view class="history" @click="orderClick(1)" hover-class="btn_Click">
-					<image src="../../static/GRZX/tubiao_pay3.png" class="imgStyle3" mode="aspectFill"></image>
-					<text class="myFont">已完成</text>
 				</view>
 			</view>
 		</view>
-
-		<!-- 广告 -->
-		<image :src="advert" class="advertClass" lazy-load="true"></image>
-
+		<!-- 订单链接按钮 -->
+		<view class="myBox">
+			<view class="collection" @click="orderClick(3)" hover-class="btn_Click">
+				<image src="../../static/GRZX/tubiao_pay1.png" class="imgStyle1" mode="aspectFill"></image>
+				<text class="myFont">待支付</text>
+			</view>
+			<view class="order" @click="orderClick(2)" hover-class="btn_Click">
+				<image src="../../static/GRZX/tubiao_pay2.png" class="imgStyle2" mode="aspectFill"></image>
+				<text class="myFont">进行中</text>
+			</view>
+			<view class="history" @click="orderClick(1)" hover-class="btn_Click">
+				<image src="../../static/GRZX/tubiao_pay3.png" class="imgStyle3" mode="aspectFill"></image>
+				<text class="myFont">已完成</text>
+			</view>
+		</view>
+		
 		<view class="serviceBox">
-			<text class="moreClass">更多服务</text>
+			<text class="moreClass">服务列表</text>
 			<!-- 分割线 -->
 			<view class="lineClass"></view>
-			
-			<!-- ========================更多服务的功能模块============================ -->
 			<view style="display: flex; flex-wrap: wrap;">
 				<view v-for="(item,index) in serviceList" :key="index">
-					<view class="itemClass" @click="infoClick" v-if="item.ItemTitle=='乘客管理'&&item.IsUse" hover-class="btn_Click">
+					<view class="itemClass" @click="operateClick(item)" v-if="item.IsUse" hover-class="btn_Click">
 						<image :src="item.ImageURL" class="XXGLicon"></image>
 						<text class="fontStyle">{{item.ItemTitle}}</text>
 					</view>
-					<view class="itemClass" @click="pictureClick" v-if="item.ItemTitle=='站点拍照'&&item.IsUse" hover-class="btn_Click">
-						<image :src="item.ImageURL" class="ZDPZicon"></image>
-						<text class="fontStyle">{{item.ItemTitle}}</text>
-					</view>
-					<view class="itemClass" @click="complaintClick" v-if="item.ItemTitle=='我的投诉'&&item.IsUse" hover-class="btn_Click">
-						<image :src="item.ImageURL" class="WDTSicon"></image>
-						<text class="fontStyle">{{item.ItemTitle}}</text>
-					</view>
-					<view class="itemClass" @click="addContact" v-if="item.ItemTitle=='紧急联系人'&&item.IsUse" hover-class="btn_Click">
-						<image :src="item.ImageURL" class="JJLXRicon"></image>
-						<text class="fontStyle">{{item.ItemTitle}}</text>
-					</view>
-					
-					<view class="itemClass" @click="realName" v-if="item.ItemTitle=='实名认证'&&item.IsUse" hover-class="btn_Click">
-						<image :src="item.ImageURL" class="SMRZicon"></image>
-						<text class="fontStyle">{{item.ItemTitle}}</text>
-					</view>
-					<view class="itemClass" @click="replacePhoneNum" v-if="item.ItemTitle=='更换手机号'&&item.IsUse" hover-class="btn_Click">
-						<image :src="item.ImageURL" class="GHSJHicon"></image>
-						<text class="fontStyle">{{item.ItemTitle}}</text>
-					</view>
-					<!-- #ifdef H5 -->
-					<view class="itemClass" @click="phoneClick" v-if="item.ItemTitle=='电话客服'&&item.IsUse" hover-class="btn_Click">
-						<image :src="item.ImageURL" class="DHKFicon"></image>
-						<text class="fontStyle">{{item.ItemTitle}}</text>
-					</view>
-					<!-- #endif -->
-					<view class="itemClass" @click="feedbackClick" v-if="item.ItemTitle=='意见反馈'&&item.IsUse" hover-class="btn_Click">
-						<image :src="item.ImageURL" class="YJFKicon"></image>
-						<text class="fontStyle">{{item.ItemTitle}}</text>
-					</view>
-					
-					<!-- #ifdef MP-WEIXIN -->
-					<view class="itemClass" style="position: relative;" v-if="item.ItemTitle=='在线客服'&&item.IsUse"> 
-						<image :src="item.ImageURL" class="ZXKFicon"></image>
-						<button open-type="contact" class="contactClass" hover-class="btn_Click"></button>
-						<text class="fontStyle">{{item.ItemTitle}}</text>
-					</view>
-					<!-- #endif -->
-					<!-- #ifdef APP-PLUS -->
-					<view class="itemClass" @click="QQClick" v-if="item.ItemTitle=='QQ客服'&&item.IsUse" hover-class="btn_Click">
-						<image :src="item.ImageURL" class="QQKFicon"></image>
-						<text class="fontStyle">{{item.ItemTitle}}</text>
-					</view>
-					<!-- #endif -->
-				</view>
-			</view>
-			<!-- ========================更多服务的功能模块============================ -->
-			
-		</view>
-
-		<!-- 添加紧急联系人弹窗 -->
-		<view :hidden="userFeedbackHidden" class="popup_content">
-			<view class="popup_title">添加</view>
-			<view class="popup_textarea_item">
-				<input class="inputClass" v-model="contantPhone" placeholder="输入紧急联系人的手机号码" type="number" maxlength="11" :focus='focusType' />
-				<view>
-					<button class="popup_button" @click="submit">确定</button>
 				</view>
 			</view>
 		</view>
-		<view class="popup_overlay" :hidden="userFeedbackHidden" @click="hideDiv"></view>
 	</view>
 </template>
 
@@ -134,7 +57,7 @@
 			return {
 				applyName:'',   //应用名称
 				
-				QQ: '', 		//qq客服
+				QQ: '1882547782', 		//qq客服
 				nickname: '', 	//昵称
 				port: '', 		//头像
 				advert: '', 	//广告
@@ -184,60 +107,19 @@
 				this.serviceList=[{
 						IsUse: true,
 						clickURL: "",
-						ImageURL: "../../static/GRZX/ServiceIcon/tb_XXGL.png",
+						ImageURL: "../../static/GRZX/newIcon/ckgl.png",
 						ItemTitle: "乘客管理"
-					},{
-						IsUse: false,
-						clickURL: "",
-						ImageURL: "../../static/GRZX/ServiceIcon/tb_ZDPZ.png",
-						ItemTitle: "站点拍照"
 					},
 					{
 						IsUse: true,
 						clickURL: "",
-						ImageURL: "../../static/GRZX/ServiceIcon/tb_WDTS.png",
-						ItemTitle: "我的投诉"
-					},
-					{
-						IsUse: false,
-						clickURL: "",
-						ImageURL: "../../static/GRZX/ServiceIcon/tb_JXLXR.png",
-						ItemTitle: "紧急联系人"
-					},
-					{
-						IsUse: false,
-						clickURL: "",
-						ImageURL: "../../static/GRZX/ServiceIcon/tb_SMRZ.png",
-						ItemTitle: "实名认证"
-					},
-					{
-						IsUse: false,
-						clickURL: "",
-						ImageURL: "../../static/GRZX/ServiceIcon/tb_GHSJH.png",
-						ItemTitle: "更换手机号"
-					},
-					{
-						IsUse: true,
-						clickURL: "",
-						ImageURL: "../../static/GRZX/ServiceIcon/tb_DHKF.png",
+						ImageURL: "../../static/GRZX/newIcon/phone.png",
 						ItemTitle: "电话客服"
 					},
 					{
 						IsUse: true,
 						clickURL: "",
-						ImageURL: "../../static/GRZX/ServiceIcon/tb_YJFK.png",
-						ItemTitle: "意见反馈"
-					},
-					{
-						IsUse: true,
-						clickURL: "",
-						ImageURL: "../../static/GRZX/ServiceIcon/tb_ZXKF.png",
-						ItemTitle: "在线客服"
-					},
-					{
-						IsUse: true,
-						clickURL: "",
-						ImageURL: "../../static/GRZX/ServiceIcon/tb_QQKF.png",
+						ImageURL: "../../static/GRZX/newIcon/qq.png",
 						ItemTitle: "QQ客服"
 					},]
 			},
@@ -294,7 +176,7 @@
 						}
 					},
 					fail() {
-						that.nickname = "游客";
+						that.nickname = "请登录";
 						that.port = "";
 					}
 				})
@@ -361,6 +243,17 @@
 							});
 						}
 					})
+				}
+			},
+			
+			// ---------------------------操作处理----------------------------
+			operateClick(e){
+				if(e.ItemTitle=='乘客管理'){
+					this.infoClick();
+				}else if(e.ItemTitle=='QQ客服'){
+					this.QQClick();
+				}else if(e.ItemTitle=='电话客服'){
+					this.phoneClick();
 				}
 			},
 			
@@ -532,38 +425,39 @@
 			// ---------------------------电话客服--------------------------
 			phoneClick() {
 				var that = this;
-				// uni.makePhoneCall({
-				// 	phoneNumber: that.phoneNumber, //仅为示例
-				// });
-				uni.request({
-					url:that.$GrzxInter.Interface.SearchCustomerService.value,
-					data:{
-						region:'泉州',
-					},
-					method:that.$GrzxInter.Interface.SearchCustomerService.method,
-					success(res){
-						console.log(res)
-						uni.makePhoneCall({
-						    phoneNumber: res.data.data.phone, 
-						});
-					}
-				})
+				uni.makePhoneCall({
+					phoneNumber: '15246559766', //仅为示例
+				});
+				// uni.request({
+				// 	url:that.$GrzxInter.Interface.SearchCustomerService.value,
+				// 	data:{
+				// 		region:'泉州',
+				// 	},
+				// 	method:that.$GrzxInter.Interface.SearchCustomerService.method,
+				// 	success(res){
+				// 		console.log(res)
+				// 		uni.makePhoneCall({
+				// 		    phoneNumber: res.data.data.phone, 
+				// 		});
+				// 	}
+				// })
 			},
 			
 			// ---------------------------QQ客服--------------------------
 			QQClick() {
 				// #ifdef APP-PLUS
-				var that = this;
-				uni.request({
-					url: that.$GrzxInter.Interface.SearchCustomerService.value,
-					data: {
-						region: '泉州',
-					},
-					method: that.$GrzxInter.Interface.SearchCustomerService.method,
-					success(res) {
-						plus.runtime.openURL('mqq://im/chat?chat_type=wpa&uin=' + res.data.data.qq + '&version=1&src_type=web ');
-					}
-				})
+				plus.runtime.openURL('mqq://im/chat?chat_type=wpa&uin=' + this.QQ + '&version=1&src_type=web ');
+				// var that = this;
+				// uni.request({
+				// 	url: that.$GrzxInter.Interface.SearchCustomerService.value,
+				// 	data: {
+				// 		region: '泉州',
+				// 	},
+				// 	method: that.$GrzxInter.Interface.SearchCustomerService.method,
+				// 	success(res) {
+				// 		plus.runtime.openURL('mqq://im/chat?chat_type=wpa&uin=' + res.data.data.qq + '&version=1&src_type=web ');
+				// 	}
+				// })
 				//#endif
 			},
 			
@@ -659,26 +553,18 @@
 		background-color: #F5F9FA;
 	}
 
-	.content {}
+	.content {
+		display: flex;
+		flex-direction: column;
+	}
 
-	.backImg {
+	.backImg1 {
 		width: 100%;
-		height: 510upx;
+		height: 340upx;
 		position: relative;  
-		z-index: 1;  
-		overflow: hidden;
+		background:linear-gradient(-36deg,rgba(255,255,255,1) 0%,rgba(251,121,101,1) 0%,rgba(249,90,118,1) 100%);
 	}
 	
-	.backImg::after{
-		/* 以下不允许修改 */
-		width: 120%;
-		height: 490upx;
-		border-radius: 0 0 50% 50%;
-		position: absolute;
-		left:-10%;
-		z-index: -1;  
-		content: '';
-	}
 
 	.imgClass {
 		//背景图片
@@ -738,8 +624,8 @@
 		//昵称
 		font-size: 42upx;
 		color: #FFFFFF;
-		margin-top: 17upx;
-		margin-left: 3%;
+		margin-top: 30upx;
+		margin-left: 5%;
 		width: 350upx;
 		display: block;
 		text-overflow: ellipsis;
@@ -836,14 +722,11 @@
 		//包括我的收藏，我的订单，我的历史
 		width: 91.47%;
 		height: 170upx;
-		position: absolute;
-		left: 4.27%;
-		top: 341upx;
-		background-color: #FFFFFF;
+		margin-left: 4.27%;
+		margin-top: 40upx;
 		display: flex;
 		flex-direction: row;
-		border-radius: 12upx;
-		z-index:999;
+		background-color: #FFFFFF;
 	}
 
 	.collection {
@@ -958,9 +841,9 @@
 	//图标样式开始
 	//第一排
 	.XXGLicon{
-		width: 50upx;
-		height: 54upx;
-		padding: 30upx 60upx 16upx 60upx;
+		width: 48upx;
+		height: 48upx;
+		padding: 35upx 60upx 16upx 60upx;
 	}
 	
 	.ZDPZicon{
@@ -1117,7 +1000,10 @@
 		height: 140upx;
 		opacity: 0;
 	}
-
+	.orderClasss{
+		margin-top: 20upx;
+		margin-left: 5%;
+	}
 	// .contactClass::after{
 	// 	border: none; 
 	// }
