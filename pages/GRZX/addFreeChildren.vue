@@ -85,7 +85,7 @@
 		</form>
 		<view class="title">
 			<image src="../../static/GRZX/btnReturn.png" class="returnClass" @click="returnClick"></image>
-			<text class="textClass" @click="returnClick">常用信息设置</text>
+			<text class="textClass" @click="returnClick">添加</text>
 		</view>
 	</view>
 </template>
@@ -122,7 +122,7 @@
 		},
 		onLoad (){	
 			this.loadUnid();//加载账号id
-			this.loadText();//加载乘车人须知
+			//this.loadText();//加载乘车人须知
 		},
 		methods:{
 			//------------------------------------加载账号id------------------------------------

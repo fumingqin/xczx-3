@@ -4,30 +4,26 @@
 		<view class="passengerList">
 			<view class="boxClass" v-for="(item, index) in passengerList" :key="index" @click="choosePassenger(item)">  <!--非个人中心页面进入 -->
 				<view class="nameClass">{{item.userName}}</view>
-				<view class="sexClass" name="userSex">{{item.userSex}}</view>
-				<!-- <view class="typeClass">{{item.userType}}</view> -->
-				<view class="codeClass fontStyle">证件号</view>
+				<view class="codeClass fontStyle">身份证号</view>
 				<view class="codeNumClass fontStyle">{{item.userCodeNum}}</view>
-				<view class="phoneClass fontStyle">联系电话</view>
 				<view class="phoneNumClass fontStyle">{{item.userPhoneNum}}</view>
 				<view>
 					<image v-if="item.hiddenIndex == 1"  class="checkClass" src="../../static/GRZX/checked.png"></image>
+					<text v-if="item.hiddenIndex != 1" class="checkClass1">点击选择</text>
 				</view>
-				<view class="redBox">
-					<view class="typeClass">{{item.userType}}</view>
-					<text style="font-size: 24upx;color: #2C2D2D;line-height: 57upx;margin-left: 20upx;">{{item.userauditState}}</text>
-					<text v-if="item.userDefault==true" class="fontClass" style="width: 80upx;">本人</text>
-					<!-- <text v-if="item.userEmergencyContact==true" class="fontClass" style="width: 80upx;">联系人</text> -->
-				</view>
+				<!-- <view class="redBox">
+					<text v-if="item.userDefault==true" class="fontClass" style="width: 80upx;">默认</text>
+				</view> -->
 			</view>
 		</view>	
 		<view class="btnBox"> 
-			<button type="warn" @click="addPassenger" class="btnAdd1">+添加乘客</button>
-			<button type="primary" @click="definite" class="btnDefinite">确定</button>
+			<!-- <button type="warn" @click="addPassenger" class="btnAdd1">添加</button> -->
+			<button @click="definite" class="btnDefinite">已选好</button>
 		</view>
 		<view class="returnBox" @click="returnPages">
 			<image class="returnClass" src="../../static/GRZX/btnReturn.png"></image>
-			<view class="titleClass">返回</view>
+			<view class="titleClass">选择乘客信息</view>
+			<view class="addClass" @click="addPassenger">添加</view>
 		</view>
 	</view>
 </template>
@@ -227,10 +223,15 @@
 	}
 	.checkClass{	//勾选
 		position: absolute;
-		left: 89.26%;
-		top:90upx;
+		left: 10%;
+		top:68upx;
 		width: 45upx;
 		height:46upx ;
+	}
+	.checkClass1{	//勾选
+		position: absolute;
+		left: 6%;
+		top:68upx;
 	}
 	.returnClass{ //返回按钮
 		width: 22upx;
@@ -282,10 +283,12 @@
 	}
 	.btnDefinite{
 		border-radius: 12upx;
-		width: 45%;
+		width: 90%;
 		height: 90upx;
 		line-height: 90upx;
 		margin-top: 30upx;
+		background-color: #ff0000;
+		color: #FFFFFF;
 	}
 	.btnAdd2{ //添加按钮
 		width: 92%;
@@ -297,22 +300,21 @@
 	}
 	.boxClass{
 		background-color: #FFFFFF;
-		width: 94%;
+		width: 100%;
 		margin-top: 20upx;
-		margin-left: 3%;
-		height: 230upx;
+		margin-left: 0%;
+		height: 180upx;
 		font-size:28upx;
 		color: #666666;
 		position: relative;
-		border-radius:20upx ;
+		// display: flex;
 	}
 	.nameClass{
 		font-size: 36upx;
 		color: #2C2D2D;
 		position: absolute;
-		left: 4%;
+		left:25%;
 		top:30upx;
-		font-weight: bold;
 		width: 18%;
 		font-weight: bold;
 		display: block;
@@ -329,35 +331,29 @@
 	}
 	.fontStyle{
 		color: #666666;
-		font-size: 27upx;
+		font-size: 30upx;
 	}
 	.typeClass{
 		font-size: 24upx;
 		color: #2C2D2D;
-		line-height: 57upx;
 		// position: absolute;
 		// left: 33%;
 		// top:47upx;
 	}
 	.codeClass{
 		position: absolute;
-		left: 4%;
+		left: 25%;
 		top:108upx;
 	}
 	.codeNumClass{
 		position: absolute;
-		left: 25%;
+		left: 45%;
 		top:108upx;
-	}
-	.phoneClass{
-		position: absolute;
-		left: 4%;
-		top:163upx;
 	}
 	.phoneNumClass{
 		position: absolute;
-		left: 25%;
-		top:163upx;
+		left: 45%;
+		top:44upx;
 	}
 	.returnBox{
 		width: 100%;
@@ -386,8 +382,8 @@
 	}
 	.redBox{
 		position: absolute;
-		left:32%;
-		top: 34upx;
+		left:80%;
+		top: 35upx;
 		display: flex;
 	}
 	.fontClass{ //本人,紧急联系人,待审核,审核通过,审核未通过
@@ -400,4 +396,21 @@
 		border-radius: 10upx;
 		text-align: center;
 	}
+	.addClass{	//添加
+		position: absolute;
+		/* #ifdef H5 */
+		top: 20upx;
+		/* #endif */
+		/* #ifndef H5 */
+		top: 90upx;
+		/* #endif */
+		/* #ifdef MP-WEIXIN */
+		left: 60%;
+		/* #endif */
+		/* #ifndef MP-WEIXIN */
+		left: 85%;
+		/* #endif */
+		color: #232323;
+		font-size: 38upx;
+	} 
 </style>

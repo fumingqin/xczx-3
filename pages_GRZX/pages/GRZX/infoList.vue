@@ -4,34 +4,32 @@
 		<view class="mt">
 			<view class="boxClass" v-for="(item, index) in passengerList" :key="index">  <!--个人中心页面进入 -->
 				<view class="nameClass">{{item.userName}}</view>
-				<view class="sexClass">{{item.userSex}}</view>
-				<view class="codeClass fontStyle">证件号</view>
+				<view class="codeClass fontStyle">身份证号</view>
 				<view class="codeNumClass fontStyle">{{item.userCodeNum}}</view>
-				<view class="phoneClass fontStyle">联系电话</view>
 				<view class="phoneNumClass fontStyle">{{item.userPhoneNum}}</view>
-				<view class="redBox">
-					<view class="typeClass">{{item.userType}}</view>
-					<text style="font-size: 24upx;color: #2C2D2D;line-height: 57upx;margin-left: 20upx;">{{item.userauditState}}</text>
-					<text v-if="item.userDefault==true" class="fontClass" style="width: 80upx;">本人</text>
-				</view>
+				<!-- <view class="redBox">
+					<text v-if="item.userDefault==true" class="fontClass" style="width: 80upx;">默认</text>
+				</view> -->
 				<image v-if="state==1" src="../../static/GRZX/edit.png" @click="editPassenger(item)" class="commonClass"></image>
 				<image v-if="state==2" src="../../static/GRZX/deletePassenger.png" @click="deletePassengers(item)" class="commonClass"></image>
 			</view>
 		</view>
 		<view class="btnBox">
-			<button @click="addPassenger" class="btnAdd btn_background btn_fontColor">+添加乘客</button>
+			<button @click="addPassenger" class="btnAdd1 btn_background btn_fontColor">添加</button>
+			<button  v-if="state==1" @click="deleteClick" class="btnAdd2 btn_background btn_fontColor">管理</button>
+			<button  v-if="state==2" @click="finishClick" class="btnAdd2 btn_background btn_fontColor">完成</button>
 		</view>	
 		
 		<view class="topClass">
 			<!-- #ifndef MP-WEIXIN -->
-			<text class="titleClass">常用信息设置</text>
+			<text class="titleClass">信息管理</text>
 			<!-- #endif -->
 			<!-- #ifdef MP-WEIXIN -->
-			<text class="titleClass" @click="returnClick">常用信息设置</text>
+			<text class="titleClass" @click="returnClick">信息管理</text>
 			<!-- #endif -->
 			<image src="../../static/GRZX/btnReturn.png" class="returnClass" @click="returnClick"></image>
-			<view v-if="state==1" class="dfClass" @click="deleteClick">管理</view>
-			<view v-if="state==2" class="dfClass" @click="finishClick">完成</view>
+			<!-- <view v-if="state==1" class="dfClass" @click="deleteClick">管理</view>
+			<view v-if="state==2" class="dfClass" @click="finishClick">完成</view> -->
 		</view>
 	</view>
 </template>
@@ -234,7 +232,7 @@
 			// --------------------------------删除单个乘车人信息--------------------------------
 			deletePassengers(item){
 				uni.showModal({
-					title:'友情提醒',
+					// title:'友情提醒',
 				    content: '确定删除这些乘客信息？',
 				    success: (e)=>{
 				    	if(e.confirm){
@@ -468,21 +466,20 @@
 	}
 	.boxClass{
 		background-color: #FFFFFF;
-		width: 94%;
+		width: 100%;
 		margin-top: 20upx;
-		margin-left: 3%;
-		height: 230upx;
+		margin-left: 0%;
+		height: 180upx;
 		font-size:28upx;
 		color: #666666;
 		position: relative;
-		border-radius:20upx;
 		// display: flex;
 	}
 	.nameClass{
 		font-size: 36upx;
 		color: #2C2D2D;
 		position: absolute;
-		left: 4%;
+		left:25%;
 		top:30upx;
 		width: 18%;
 		font-weight: bold;
@@ -500,7 +497,7 @@
 	}
 	.fontStyle{
 		color: #666666;
-		font-size: 27upx;
+		font-size: 30upx;
 	}
 	.typeClass{
 		font-size: 24upx;
@@ -512,28 +509,23 @@
 	}
 	.codeClass{
 		position: absolute;
-		left: 4%;
+		left: 25%;
 		top:108upx;
 	}
 	.codeNumClass{
 		position: absolute;
-		left: 25%;
+		left: 45%;
 		top:108upx;
-	}
-	.phoneClass{
-		position: absolute;
-		left: 4%;
-		top:163upx;
 	}
 	.phoneNumClass{
 		position: absolute;
-		left: 25%;
-		top:163upx;
+		left: 45%;
+		top:44upx;
 	}
 	.redBox{
 		position: absolute;
-		left:32%;
-		top: 34upx;
+		left:80%;
+		top: 35upx;
 		display: flex;
 	}
 	.fontClass{ //本人,紧急联系人,待审核,审核通过,审核未通过
@@ -564,12 +556,21 @@
 		background-color: #F6F8FC;
 		/* border: 1px solid #4CD964; */
 	}
-	.btnAdd{ //添加按钮（乘车人）（地址）
-		width: 92%;
+	.btnAdd1{ //添加按钮（乘车人）（地址）
+		width: 35%;
 		height: 90upx;
 		line-height: 90upx;
 		border-radius: 12upx;
 		margin-top: 30upx;
+		margin-left: 10%;
+	}
+	.btnAdd2{ //添加按钮（乘车人）（地址）
+		width: 35%;
+		height: 90upx;
+		line-height: 90upx;
+		border-radius: 12upx;
+		margin-top: 30upx;
+		margin-left: 10%;
 	}
 	
 	//地址管理
@@ -723,8 +724,8 @@
 	}
 	.commonClass{
 		position: absolute;
-		top:95upx;
-		right: 5%;
+		top:80upx;
+		left: 8%;
 		width: 45upx;
 		height: 45upx;
 	}
