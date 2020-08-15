@@ -2,35 +2,28 @@
 	<view class="content" v-bind:style="{height:imgHeight+'px'}">
 		<!-- 背景图 -->
 		<!-- <image :src="background" class="backClass"></image> -->
-		<image src="../../static/GRZX/loginReturn.png" class="returnClass" @click="returnClick"></image>
 
 		<view class="inputContent">
 			<!-- 手机号 -->
 			<view class="inputItem phoneNum">
-				<image src="../../static/GRZX/shouji.png" class="iconClass1"></image>
+				<!-- <image src="../../static/GRZX/shouji.png" class="iconClass1"></image> -->
 				<input type="number" placeholder="手机号码" maxlength="11" class="inputClass" data-key="phoneNumber" @input="inputChange1" />
+				<text class="getCode"  @click="getCodeClick" id="Code">{{textCode}}</text>
 			</view>
 			<!-- 验证码 -->
 			<view class="inputItem Captcha">
-				<image src="../../static/GRZX/yanzhengma.png" class="iconClass2"></image>
+				<!-- <image src="../../static/GRZX/yanzhengma.png" class="iconClass2"></image> -->
 				<input type="number" placeholder="输入验证码" maxlength="4" class="inputClass" data-key="captchaCode" @input="inputChange2" />
 			</view>
 			<!-- 按钮颜色和发送验证码的样式 -->
-			<view class="getCode style1" @click="getCodeClick" id="Code">{{textCode}}</view>
-			<text class="fontStyle" @click="loginClick">确定</text>
+			<!-- <view class="getCode style1" @click="getCodeClick" id="Code">{{textCode}}</view> -->
+			<text class="fontStyle" @click="loginClick">登录</text>
+			<text class="fontStyle1" @click="returnClick">返回上一页</text>
 			<!-- <text class="fontStyle" @click="checkRealName('1000067')">确定</text> -->
 		</view>
 
 		<!-- logo -->
 		<image src="../../static/GRZX/logo.png" class="logoClass"></image>
-
-		<!-- 第三方登录 -->
-	<!-- 	<view class="loginMode">第三方登录</view>
-		<view class="leftLine"></view>
-		<view class="rightLine"></view>
-		<image src="../../static/GRZX/appleLogo.png" class="appleClass" @click="appleLogin" v-if="platform=='ios'"></image>
-		<image src="../../static/GRZX/wxLogo.png" class="wxClass" @click="wxLogin" v-if="platform=='ios'"></image>
-		<image src="../../static/GRZX/wxLogo.png" class="wxClass1" v-if="platform!='ios'" @click="wxLogin" ></image> -->
 	</view>
 </template>
 
@@ -42,7 +35,7 @@
 	export default {
 		data() {
 			return {
-				textCode: "获取验证码", //获取验证码
+				textCode: "点击获取验证码", //点击获取验证码
 				phoneNumber: '', //手机号
 				captchaCode: '', //验证码
 				imgHeight: '', //背景图高度
@@ -501,7 +494,7 @@
 				}
 			},
 
-			//-------------------------------------获取验证码----------------------------------
+			//-------------------------------------点击获取验证码----------------------------------
 			getCodeClick: function(e) {
 				var that = this;
 				const {
@@ -511,7 +504,7 @@
 				if (that.judgeNum(that.phoneNumber)) {
 					var timer = null, //定时器
 						second = 60; //倒计时的时间
-					if (that.textCode == "获取验证码" && that.state) {
+					if (that.textCode == "点击获取验证码" && that.state) {
 						that.state = false;
 						that.getCode(timer, second, that.phoneNumber);
 					}
@@ -523,13 +516,13 @@
 				}
 			},
 
-			//-------------------------------------获取验证码的请求----------------------------
+			//-------------------------------------点击获取验证码的请求----------------------------
 			getCode: function(timer, second, phoneNumber) {
 				var that = this;
 				timer = setInterval(function() {
 					second--;
 					if (second <= 0) {
-						that.textCode = "获取验证码";
+						that.textCode = "点击获取验证码";
 						clearInterval(timer);
 						second = 60;
 						that.state = true;
@@ -548,7 +541,7 @@
 						console.log(res.data.data);
 						if (res.data.status == false) { //发送验证码次数上限
 							that.state = true;
-							that.textCode = "获取验证码";
+							that.textCode = "点击获取验证码";
 							clearInterval(timer);
 							uni.showToast({
 								title: "今日验证码发送次数已上限!",
@@ -578,17 +571,7 @@
 
 			//-------------------------------------返回按钮------------------------------------
 			returnClick: function() {
-				var that = this;
-				if(that.urlData == 1){
-					that.$GrzxInter.navToHome();//返回首页
-				}else if (that.urlData == 2) {
-					uni.switchTab({ //返回订单页
-						url: '/pages/order/OrderList',
-					})
-				} else {
-					console.log("返回上一页")
-					uni.navigateBack(); //返回上一页
-				}
+				uni.navigateBack(); //返回上一页
 			},
 
 			//-----------------------------------判断是否为base64格式----------------------------
@@ -709,7 +692,7 @@
 	.content {
 		width: 100%;
 		position: relative;
-		background:linear-gradient(-36deg,rgba(255,255,255,1) 0%,rgba(251,121,101,1) 0%,rgba(249,90,118,1) 100%);
+		// background:linear-gradient(-36deg,rgba(255,255,255,1) 0%,rgba(251,121,101,1) 0%,rgba(249,90,118,1) 100%);
 	}
 
 	.backClass {
@@ -764,34 +747,35 @@
 		position: absolute;
 		top: 324upx;
 		left: 4.8%;
-		background-color: white;
+		// background-color: #FFFFFF;
 		border-radius: 20upx;
 	}
 
 	.inputItem {
 		//输入区域的样式
 		width: 87.6%;
-		height: 140upx;
-		border-bottom: 1upx solid #EAEAEA;
+		height: 95upx;
+		border: 1upx solid #EAEAEA;
+		border-radius: 50upx;
 	}
 
 	.phoneNum {
 		position: absolute;
-		top: 130upx;
+		top: 180upx;
 		left: 6.19%;
 	}
 
 	.Captcha {
 		position: absolute;
-		top: 272upx;
+		top: 320upx;
 		left: 6.19%;
 	}
 
 	.inputClass {
 		//输入框的位置
 		position: absolute;
-		left: 12%;
-		top: 51upx;
+		left: 8%;
+		top: 25upx;
 		font-size: 32upx;
 		height: 50upx;
 		line-height: 50upx;
@@ -870,22 +854,25 @@
 	}
 
 	.getCode {
-		//获取验证码
+		//点击获取验证码
 		position: absolute;
-		top: 308upx;
-		left: 64%;
-		width: 30%;
+		top: 16upx;
+		left: 61%;
+		width: 35%;
 		font-size: 28upx;
-		border-radius: 12upx;
 		text-align: center;
 		line-height: 64upx;
-		height: 64upx;
+		height: 70upx;
+		color: #ED1C24; //绿色：#65C36D
+		border-left: 1upx solid #EAEAEA;
+		
 	}
 
 	.style1 {
-		//获取验证码
+		//点击获取验证码
 		border: 1px solid #ED1C24; //南平综合出行：#FF971E
 		color: #ED1C24; //绿色：#65C36D
+		border-radius: 50upx;
 	}
 
 	.style2 {
@@ -901,7 +888,7 @@
 	.fontStyle {
 		//确定字体样式
 		position: absolute;
-		top: 480upx;
+		top: 520upx;
 		left: 5%;
 		text-align: center;
 		font-size: 36upx;
@@ -910,7 +897,18 @@
 		padding: 25upx 0;
 		border-radius: 20upx;
 		background:linear-gradient(-36deg,rgba(255,255,255,1) 0%,rgba(251,121,101,1) 0%,rgba(249,90,118,1) 100%);
-		//background: linear-gradient(54deg, rgba(255, 128, 8, 1) 0%, rgba(255, 200, 55, 1) 100%); //南平综合出行
-		//background: linear-gradient(54deg, rgba(53, 199, 98, 1) 0%, rgba(6, 161, 54, 1) 100%); //漳州达达通
+	}
+	.fontStyle1 {
+		//确定字体样式
+		position: absolute;
+		top: 665upx;
+		left: 5%;
+		text-align: center;
+		font-size: 36upx;
+		color: #FFFFFF;
+		width: 90%;
+		padding: 25upx 0;
+		border-radius: 20upx;
+		background:linear-gradient(-36deg,rgba(255,255,255,1) 0%,rgba(251,121,101,1) 0%,rgba(249,90,118,1) 100%);
 	}
 </style>

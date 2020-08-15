@@ -24,8 +24,8 @@
 			<view class="ctky_View_Left">
 				<view style="display: flex;align-items: center;margin:20upx 25upx;">
 					<view class="markType" style="border:#1EA2FF solid 1px;color:#1EA2FF;" v-if="item.shuttleType == '普通班车' && isFlowTickets(item) == '普通'">普通班车</view>
-					<view class="markType" style="border:#FF5A00 solid 1px;color:#FF5A00;" v-if="item.shuttleType == '定制班车'">定制班车</view>
-					<view class="busMarkType" style="border:#FF5A00 solid 1px;color:#FF5A00;" v-if="item.shuttleType == '定制巴士'">定制巴士</view>
+					<view class="markType" style="border:#FF5A00 solid 1px;color:#ff961e;" v-if="item.shuttleType == '定制班车'">定制班车</view>
+					<view class="busMarkType" style="border:#FF5A00 solid 1px;color:#ff961e;" v-if="item.shuttleType == '定制巴士'">定制巴士</view>
 					<view class="markType" style="border:#1EA2FF solid 1px;color:#1EA2FF;" v-if="item.shuttleType == '普通班车' && isFlowTickets(item) == '流水'">流水</view>
 					<view style="margin-left:19upx ;font-family: SourceHanSansSC-Bold;font-weight: bold;">{{turnDate(item.setTime)}}</view>
 				</view>
@@ -42,11 +42,11 @@
 						color: #333333;">{{item.startStaion}}</view>
 					</view>
 					<view v-if="item.shuttleType != '定制巴士'" style="margin-right: 28upx;font-size: 24upx;font-style:
-					SourceHanSansSC-Regular; color: #FC4646;">全票￥{{item.fare}}</view>
+					SourceHanSansSC-Regular; color: #ff961e;">全票￥{{item.fare}}</view>
 					<!-- <view v-if="item.shuttleType != '定制巴士'" style="margin-right: 28upx;font-size: 24upx;font-style:
-					SourceHanSansSC-Regular; color: #FC4646;">儿童票￥{{item.halfTicket}}</view> -->
+					SourceHanSansSC-Regular; color: #ff961e;">儿童票￥{{item.halfTicket}}</view> -->
 					<view v-if="item.shuttleType == '定制巴士'" style="margin-right: 28upx;font-size: 24upx;font-style:
-					SourceHanSansSC-Regular; color: #FC4646;">价格￥{{item.PriceRange}}</view>
+					SourceHanSansSC-Regular; color: #ff961e;">价格￥{{item.PriceRange}}</view>
 				</view>
 				<view style="margin-left: 25upx;display: flex;align-items: center;margin-bottom: 16upx;justify-content: space-between;">
 					<view style="display: flex;align-items: center;">
@@ -58,23 +58,23 @@
 					SourceHanSansSC-Light; color: #666666;">余{{item.remainingVotes}}张</view>
 				</view>
 
-				<view style="margin-left: 25upx;margin-bottom: 10upx;font-style: SourceHanSansSC-Light;font-weight: lighter;
-				font-size: 28upx;color: #666666;margin-top: 6upx;"
-				 v-if="item.shuttleType == '普通班车'">{{item.carType}}/约{{(item.duration.slice(0,-2))}}分钟/{{item.planScheduleCode}}</view>
-				<view style="margin-left: 25upx;margin-bottom: 10upx;font-style: SourceHanSansSC-Light;font-weight: lighter;
-				font-size: 28upx;color: #666666;margin-top: 6upx;"
-				 v-if="item.shuttleType == '定制班车'">{{item.carType}}/约{{(item.duration.slice(0,-2))}}分钟/{{item.planScheduleCode}}</view>
-				<view style="margin-left: 25upx;margin-bottom: 10upx;font-style: SourceHanSansSC-Light;font-weight: lighter;
-				 font-size: 28upx;color: #666666;margin-top: 6upx;"
+				<view style="margin-left: 25upx;margin-bottom: 20upx;font-style: SourceHanSansSC-Light;font-weight: lighter;
+				font-size: 28upx;color: #AAAAAA;margin-top: 6upx;font-weight: bold;"
+				 v-if="item.shuttleType == '普通班车'">{{item.carType}} | 约{{(item.duration.slice(0,-2))}}分钟 | {{item.planScheduleCode}}</view>
+				<view style="margin-left: 25upx;margin-bottom: 20upx;font-style: SourceHanSansSC-Light;font-weight: lighter;
+				font-size: 28upx;color: #AAAAAA;margin-top: 6upx;font-weight: bold;"
+				 v-if="item.shuttleType == '定制班车'">{{item.carType}} | 约{{(item.duration.slice(0,-2))}}分钟 | {{item.planScheduleCode}}</view>
+				<view style="margin-left: 25upx;margin-bottom: 20upx;font-style: SourceHanSansSC-Light;font-weight: lighter;
+				 font-size: 28upx;color: #AAAAAA;margin-top: 6upx;font-weight: bold;"
 				 v-if="item.shuttleType == '定制巴士'">{{item.SetoutTimeDesc}}</view>
 
 				<!-- 途径站点 -->
-				<view class="st_routeSite">
+				<!-- <view class="st_routeSite">
 					<view style="text-overflow: ellipsis;white-space: nowrap;overflow: hidden;">
 						<text>途径站点:</text>
 						<text>{{turnValue(item.lineViaSiteDesc)}}</text>
 					</view>
-				</view>
+				</view> -->
 			</view>
 		</view>
 	</view>
@@ -195,7 +195,8 @@
 				systemName = $KyInterface.KyInterface.systemName.systemNameXYYHH5;;
 				// #endif
 				// #ifdef APP-PLUS
-				systemName = $KyInterface.KyInterface.systemName.systemNameXYYHAPP;
+				//systemNameXYYHAPP
+				systemName = $KyInterface.KyInterface.systemName.systemNameXYYHWeiXin;
 				// #endif
 				// #ifdef MP-WEIXIN
 				systemName = $KyInterface.KyInterface.systemName.systemNameXYYHWeiXin;
@@ -820,7 +821,7 @@
 	}
 
 	.viewPress {
-		background: #DD524D;
+		background: #ff961e;
 
 		.weekClass {
 			color: #FFFFFF;

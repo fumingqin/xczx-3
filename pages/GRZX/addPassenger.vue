@@ -1,161 +1,56 @@
 <template>
 	<view class="content">
 		<form @submit="formSubmit" style="width: 100%;">
-			<view class="box1">
-				<view class="itemClass">
-					<view class="fontStyle">姓名	</view>
-					<input placeholder="与证件姓名一致" class="inputClass" maxlength="6"  name="userName" v-model="user.userName" @blur="nameClick"/> 
-				</view>
-				<view class="itemClass borderTop">
-					<view class="fontStyle">性别</view>
-					<radio-group class="inputClass" name="userSex">
-						<label v-for="(item, index) in sexMode" :key="index" @click="radioClick(index)" > 
-							<radio style="transform: scale(0.7)" :value="user.userSex" :checked="index===user.userSex" />{{item.title}}
-						</label>  
-					</radio-group>
-				</view>
-				<view class="itemClass borderTop">
-					<view class="fontStyle">手机号码</view>
-					<input
-						type="number"
-						placeholder="请输入手机号码"
-						maxlength="11"
-						class="inputClass"
-						v-model="user.userPhoneNum"
-						name="userPhoneNum"
-						@blur="checkPhone"
-					/>				
+			<view class="itemClass bb" style="border-top:1upx solid #EAEAEA;margin-top: 170upx;">
+				<view class="fontStyle">姓  名：</view>
+				<input placeholder="请输入您的姓名" class="inputClass" maxlength="6"  name="userName" v-model="user.userName" @blur="nameClick"/> 
+			</view>	
+			<view class="itemClass bb">
+				<view class="fontStyle">性  别：</view>
+				<picker class="inputClass" mode="selector" @change="genderChange" :range="genderSex" :value="gender">
+					{{selector1}}
+				</picker>
+			</view>
+			<view class="itemClass bb">
+				<view class="fontStyle">身份证号:</view>
+				<input
+					placeholder="请保持与证件号码一致"
+					class="inputClass1"
+					v-model="user.userCodeNum"
+					name="userCodeNum"
+					type="idcard"
+					maxlength="18"
+					@blur="checkCodeNum1"
+				/>	
+			</view>
+			<view class="itemClass bb">
+				<view class="fontStyle">手机号码：</view>
+				<input
+					type="number"
+					placeholder="请输入手机号码"
+					maxlength="11"
+					class="inputClass1"
+					v-model="user.userPhoneNum"
+					name="userPhoneNum"
+					@blur="checkPhone"
+				/>				
+			</view>
+			<view class="itemClass bb">
+				<view class="fontStyle">购票类型:</view>
+				<view class="inputClass1">
+					<picker name="type"  mode="selector" @change="typeChange" :range="selectType" :value="user.type">
+						{{ticketType}}
+					</picker>	
 				</view>
 			</view>
-			<view class="codeClass">证件</view>
-			<view class="box2">
-				<view class="itemClass">
-					<view class="fontStyle" style="font-weight: bold;">证件类型</view>
-					<view class="inputClass">
-						<picker name="codeType"  mode="selector" @change="codeChange" :range="selectCode" :value="code">
-							{{codeType}}
-						</picker>	
-					</view>
-				</view>
-				<!-- 身份证 -->
-				<view v-if="code==0||code==1" class="itemClass borderTop">
-					<view class="fontStyle">证件号</view>
-					<input
-						placeholder="请保持与证件号码一致"
-						class="inputClass"
-						v-model="user.userCodeNum"
-						name="userCodeNum"
-						type="idcard"
-						maxlength="18"
-						@blur="checkCodeNum1"
-					/>	
-				</view>
-				<!-- 护照 -->
-				<view v-if="code==2" class="itemClass borderTop">
-					<view class="fontStyle">证件号</view>
-					<input
-						placeholder="请保持与证件号码一致"
-						class="inputClass"
-						v-model="user.userCodeNum"
-						name="userCodeNum"
-						@blur="checkCodeNum2"
-						maxlength="9"
-					/>	
-				</view>
-				<!-- 港澳通行证 -->
-				<view v-if="code==3" class="itemClass borderTop">
-					<view class="fontStyle">证件号</view>
-					<input
-						placeholder="请保持与证件号码一致"
-						class="inputClass"
-						v-model="user.userCodeNum"
-						name="userCodeNum"
-						@blur="checkCodeNum3"
-						maxlength="11"
-					/>	
-				</view>
-				<!-- 台胞证 -->
-				<view v-if="code==4" class="itemClass borderTop">
-					<view class="fontStyle">证件号</view>
-					<input
-						placeholder="请保持与证件号码一致"
-						class="inputClass"
-						v-model="user.userCodeNum"
-						name="userCodeNum"
-						@blur="checkCodeNum4"
-						maxlength="10"
-					/>	
-				</view>
-				<!-- 回乡证 -->
-				<!-- <view v-if="code==5" class="itemClass borderTop">
-					<view class="fontStyle">证件号</view>
-					<input
-						placeholder="请保持与证件号码一致"
-						class="inputClass"
-						:value="user.userCodeNum"
-						name="userCodeNum"
-						@blur="checkCodeNum5"
-					/>	
-				</view> -->
-				
-				<view class="itemClass borderTop">
-					<view class="fontStyle">购票类型</view>
-					<view class="inputClass">
-						<picker name="type"  mode="selector" @change="typeChange" :range="selectType" :value="user.type">
-							{{ticketType}}
-						</picker>	
-					</view>
-				</view>
-				
-				<!-- <view class="itemClass borderTop">
-					<view class="fontStyle">特殊凭证</view>
-					<view class="inputClass">
-						<picker name="prove"  mode="selector" @change="proveChange" :range="proveType" :value="user.prove">
-							{{selector}}
-						</picker>
-					</view>	
-				</view> -->
-				
-			</view>
-			
-			<view class="personClass">
-				<view class="fontStyle">设置为本人</view>
-				<view class="checkBox">
-					<checkbox-group name="userDefault" @change="checkChange">
-						<label>
-							<checkbox :checked="user.userDefault" :value="user.userDefault"  />
-						</label>
-					</checkbox-group>
-				</view>
-			</view>
-			
+			<button form-type="submit" class="btnsubmit">保存</button>	
 			<view class="noticeClass">
 				<rich-text :nodes="noticeText" style="width: 100%;"></rich-text>
-				<!-- <p>购票说明：</p></br><p>①成人和身高超过1.5米的儿童购买全票。</p></br>
-				<p>②身高1.2-1.5米，或身高1.2米以下需要单独占用座位的儿童可购买半票。</p></br>
-				<p>③身高1.2米以下儿童乘车免票，需由成人陪同不提供单独座位。
-				根据交管部门规定，一班车免票儿童人数不得超过核定座位数的10%，如携带儿童乘车务必在此声明人数。
-				如系统提示免票儿童名额已满，请选择其他时间班次或购买半票。</p></br>
-				<p>④根据车站相关规定，请携带并出示相关的证件。</p> -->
 			</view>
-			
-			<!-- <view v-if="!user.show" style="margin-bottom: 150upx;"></view>
-			<view v-if="false" class="emergencyClass">
-				<view class="fontStyle">紧急联系人</view>
-				<view class="checkBox">
-					<checkbox-group name="userEmergencyContact">
-						<label>
-							<checkbox :checked="user.userEmergencyContact" :value="user.userEmergencyContact" />
-						</label>
-					</checkbox-group>
-				</view>
-			</view> -->
-			<button  class="btndelete btn_GRZX_CZ" @click="resetClick">重置</button>
-			<button form-type="submit" class="btnsubmit btn_background btn_fontColor">保存</button>		
 		</form>
 		<view class="title">
 			<image src="../../static/GRZX/btnReturn.png" class="returnClass" @click="returnClick"></image>
-			<text class="textClass" @click="returnClick">常用信息设置</text>
+			<text class="textClass" @click="returnClick">添加乘车人</text>
 		</view>
 	</view>
 </template>
@@ -164,27 +59,26 @@
 	export default {
 		data(){
 			return{
-				sexMode :[
-					{title:'男'},
-					{title:'女'}
-				],
+				genderSex:['','男','女'], 
+				gender:1,
+				selector1:'男',
 				proveType:['请选择','军人','教师','学生'],
 				selectType:['请选择','成人','半票儿童','免票儿童'],
 				selectCode:['请选择','身份证','护照','港澳通行证','台胞证'],
 				// codeType:'请选择证件类型 >',
-				codeType:'身份证 >',
-				ticketType:'请选择购票类型 >',
+				codeType:'身份证',
+				ticketType:'成人',
 				selector:'请选择特殊凭证 >',
 				user:{
 					passengerId:'',//乘车人id
 					userName:'',	
-					userSex:0,
+					userSex:1,
 					userPhoneNum:'',
 					userCodeNum:'',
 					userDefault:false,
 					show:true,
 					prove:0,
-					type:0,
+					type:1,
 					// userEmergencyContact:false,
 					// date:'请选择',
 					// date:'',
@@ -297,10 +191,10 @@
 						}
 					//----------加载证件类型--------	
 						if(res.data.userauditState==""){
-							that.user.codeType="请选择证件类型 >";
+							that.user.codeType="请选择证件类型";
 							that.code=0;
 						}else{
-							that.codeType=res.data.userauditState+" >";
+							that.codeType=res.data.userauditState;
 							if(res.data.userauditState=='身份证'){
 								that.code=1;
 							}else if(res.data.userauditState=='护照'){
@@ -335,9 +229,16 @@
 			},
 			
 			//------------------选择性别----------------
-			radioClick:function(e){
-				this.user.userSex = e;
+			genderChange : function(e){
+				console.log(e.detail.value,"sex")
+				if(e.detail.value==0){
+					this.selector1="请选择";
+				}else{
+					this.selector1 =this.genderSex[e.detail.value]; 
+				}
+				this.gender=e.detail.value;
 			},
+			
 			//------------------上传乘车人信息----------------
 			formSubmit:function(e){
 				var data1=e.target.value;
@@ -414,14 +315,14 @@
 						title:'输入的证件号有误，请检查',
 						icon:'none',
 					})
-				}else if(data1.userType=="请选择购票类型 >"){
+				}else if(data1.userType=="请选择购票类型"){
 					uni.showToast({
 						title:'请选择购票类型',
 						icon:'none',
 					})
 				}else{
-					data1.userType = data1.userType.substring(0,data1.userType.length-2);
-					data1.userauditState = data1.userauditState.substring(0,data1.userauditState.length-2);
+					//data1.userType = data1.userType.substring(0,data1.userType.length-2);
+					//data1.userauditState = data1.userauditState.substring(0,data1.userauditState.length-2);
 					uni.showLoading({
 						title:'保存中...'
 					})
@@ -581,9 +482,9 @@
 				this.user.type=e.detail.value;
 				console.log(e)
 				if(e.detail.value==0){
-					this.ticketType="请选择购票类型 >";
+					this.ticketType="请选择购票类型";
 				}else{
-					this.ticketType=this.selectType[e.detail.value]+" >";
+					this.ticketType=this.selectType[e.detail.value];
 				}
 			},
 			
@@ -842,11 +743,10 @@
 		border-radius: 25upx;
 	}
 	.itemClass{  
-		width: 618upx;
-		height: 110upx;
-		margin-left: 40upx;
-		margin-top: 0upx;
-		
+		width: 100%;
+		height: 100upx;
+		margin-left: 0upx;
+		background-color: #FFFFFF;
 	}
 	.codeClass{  //证件
 		margin-top: 20upx;
@@ -908,14 +808,13 @@
 		font-size: 35upx;
 	}
 	.btnsubmit{		//保存
-		width: 60%;
-		height: 108upx;
-		position: fixed;
-		bottom: 0upx;
-		left: 40%;
-		border-radius: 0upx;
-		text-align: center;
-		line-height: 108upx;
+		width: 90%;
+		height: 95upx;
+		margin-left: 5%;
+		margin-top: 30upx;
+		background-color: #ff0000;
+		color: #FFFFFF;
+		line-height: 95upx;
 		font-size: 35upx;
 	}
 	.inputClass{
@@ -923,9 +822,18 @@
 		width: 50%;
 		height: 108upx;
 		font-size: 32upx;
-		right: 9%;
+		left: 25%;
 		line-height: 108upx;
-		text-align: right;
+		text-align: left;
+	}
+	.inputClass1{
+		position: absolute;
+		width: 50%;
+		height: 108upx;
+		font-size: 32upx;
+		left: 30%;
+		line-height: 108upx;
+		text-align: left;
 	}
 	.checkBox{ 
 		line-height: 108upx;
@@ -1000,5 +908,8 @@
 		line-height: 52upx;
 		font-size: 32upx;
 		color: #ff0000;
+	}
+	.bb{
+		border-bottom:1upx solid #EAEAEA;
 	}
 </style>

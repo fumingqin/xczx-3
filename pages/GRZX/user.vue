@@ -2,9 +2,9 @@
 	<view class="content">
 		<view class="backImg1">
 			<!-- #ifdef APP-PLUS -->
-			<image src="../../static/GRZX/set.png" class="setClass" @click="navTo('set')"></image>
+			<!-- <image src="../../static/GRZX/set.png" class="setClass" @click="navTo('set')"></image>
 			<image src="../../static/GRZX/info.png" class="infoClass" @click="navTo('myNews')"></image>
-			<image src="../../static/GRZX/scan.png" class="scanClass" @click="navTo('scan')"></image>
+			<image src="../../static/GRZX/scan.png" class="scanClass" @click="navTo('scan')"></image> -->
 			<!-- #endif -->
 			
 			<!-- 个人信息，头像，昵称等等 -->
@@ -15,33 +15,33 @@
 				</view>
 			</view>
 		</view>
-		<!-- 订单链接按钮 -->
-		<view class="myBox">
-			<view class="collection" @click="orderClick(3)" hover-class="btn_Click">
-				<image src="../../static/GRZX/tubiao_pay1.png" class="imgStyle1" mode="aspectFill"></image>
-				<text class="myFont">待支付</text>
-			</view>
-			<view class="order" @click="orderClick(2)" hover-class="btn_Click">
-				<image src="../../static/GRZX/tubiao_pay2.png" class="imgStyle2" mode="aspectFill"></image>
-				<text class="myFont">进行中</text>
-			</view>
-			<view class="history" @click="orderClick(1)" hover-class="btn_Click">
-				<image src="../../static/GRZX/tubiao_pay3.png" class="imgStyle3" mode="aspectFill"></image>
-				<text class="myFont">已完成</text>
+		
+		
+		<view style="margin-top: 20upx;border-top:1upx solid #DFDFDF;">
+			<view class="itemClass bt" hover-class="clickClass"  v-for="(item,index) in serviceList" :key="index" @click="operateClick(item)">
+				<text class="fontClass">{{item.ItemTitle}}</text>
+				<image src="../../static/GRZX/newIcon/rightIcon.png" :class="item.style"></image>
 			</view>
 		</view>
 		
-		<view class="serviceBox">
-			<text class="moreClass">服务列表</text>
-			<!-- 分割线 -->
-			<view class="lineClass"></view>
-			<view style="display: flex; flex-wrap: wrap;">
-				<view v-for="(item,index) in serviceList" :key="index">
-					<view class="itemClass" @click="operateClick(item)" v-if="item.IsUse" hover-class="btn_Click">
-						<image :src="item.ImageURL" class="XXGLicon"></image>
-						<text class="fontStyle">{{item.ItemTitle}}</text>
-					</view>
-				</view>
+		<!-- 订单链接按钮 -->
+		<text style="margin-top: 20upx; margin-left: 2%;">我的订单</text>
+		<view class="myBox">
+			<view class="history" @click="orderClick(1)" hover-class="btn_Click">
+				<image src="../../static/GRZX/newIcon/tubiao_pay3.png" class="imgStyle1" mode="aspectFill"></image>
+				<text class="myFont">已完成</text>
+			</view>
+			<view class="order" @click="orderClick(2)" hover-class="btn_Click">
+				<image src="../../static/GRZX/newIcon/tubiao_pay2.png" class="imgStyle1" mode="aspectFill"></image>
+				<text class="myFont">进行中</text>
+			</view>
+			<view class="collection" @click="orderClick(3)" hover-class="btn_Click">
+				<image src="../../static/GRZX/newIcon/tubiao_pay1.png" class="imgStyle1" mode="aspectFill"></image>
+				<text class="myFont">未支付</text>
+			</view>
+			<view class="history" @click="orderClick(4)" hover-class="btn_Click">
+				<image src="../../static/GRZX/newIcon/tubiao_pay4.png" class="imgStyle1" mode="aspectFill"></image>
+				<text class="myFont">已取消</text>
 			</view>
 		</view>
 	</view>
@@ -104,24 +104,36 @@
 			
 			// ---------------------------加载服务功能模块----------------------------
 			loadServiceList(){
-				this.serviceList=[{
+				this.serviceList=[
+					{
 						IsUse: true,
 						clickURL: "",
-						ImageURL: "../../static/GRZX/newIcon/ckgl.png",
-						ItemTitle: "乘客管理"
+						ImageURL: "../../static/GRZX/newIcon/qq.png",
+						ItemTitle: "QQ客服",
+						style:"rightClass1 ml",
 					},
 					{
 						IsUse: true,
 						clickURL: "",
 						ImageURL: "../../static/GRZX/newIcon/phone.png",
-						ItemTitle: "电话客服"
+						ItemTitle: "电话客服",
+						style:"rightClass1",
 					},
+					{
+							IsUse: true,
+							clickURL: "",
+							ImageURL: "../../static/GRZX/newIcon/ckgl.png",
+							ItemTitle: "信息管理",
+							style:"rightClass1",
+						},
 					{
 						IsUse: true,
 						clickURL: "",
 						ImageURL: "../../static/GRZX/newIcon/qq.png",
-						ItemTitle: "QQ客服"
-					},]
+						ItemTitle: "退出登录",
+						style:"rightClass1",
+					},
+					]
 			},
 			
 			// ---------------------------加载数据----------------------------
@@ -178,6 +190,54 @@
 					fail() {
 						that.nickname = "请登录";
 						that.port = "";
+					}
+				})
+			},
+			
+			//------------------------------------退出登录--------------------------
+			toLogout(){				
+				// var user=uni.getStorageSync('userInfo');
+				// console.log(user,"00000")
+				// if(user!=null||user!=""){
+				var that=this;
+				uni.getStorage({
+					key:'userInfo',
+					success(){
+						uni.showModal({
+							title:'提示',
+							content: '确定要退出登录吗？',
+							success: (e)=>{
+								if(e.confirm){
+									uni.removeStorageSync('userInfo');
+									uni.removeStorageSync('RealNameInfo');
+									setTimeout(()=>{
+										uni.switchTab({
+											url:'/pages/GRZX/user'
+											// url:that.$GrzxInter.Route.user.url,
+										})
+									}, 200)
+								}
+							}
+						});
+					},
+					fail(){
+						uni.showToast({
+							title : '请先登录',
+							icon : 'none',
+						})
+						//#ifdef APP-PLUS
+						setTimeout(function(){
+							uni.navigateTo({
+								// url  : '/pages/GRZX/userLogin',
+								url:that.$GrzxInter.Route.userLogin.url +'?urlData=1'
+							}) 
+						},1000);
+						// #endif
+						//#ifdef MP-WEIXIN
+						uni.navigateTo({
+							url:'/pages/Home/wxAuthorize',
+						})
+						// #endif
 					}
 				})
 			},
@@ -248,16 +308,18 @@
 			
 			// ---------------------------操作处理----------------------------
 			operateClick(e){
-				if(e.ItemTitle=='乘客管理'){
+				if(e.ItemTitle=='信息管理'){
 					this.infoClick();
 				}else if(e.ItemTitle=='QQ客服'){
 					this.QQClick();
 				}else if(e.ItemTitle=='电话客服'){
 					this.phoneClick();
+				}else if(e.ItemTitle=='退出登录'){
+					this.toLogout();
 				}
 			},
 			
-			// ---------------------------乘客管理----------------------------
+			// ---------------------------信息管理----------------------------
 			infoClick() {
 				uni.navigateTo({
 					url: this.$GrzxInter.Route.infoList.url,
@@ -373,10 +435,6 @@
 						url: '/pages/Home/wxAuthorize',
 					})
 					// #endif
-				} else {
-					uni.navigateTo({
-						url: that.$GrzxInter.Route.personal.url,
-					})
 				}
 				//#endif
 				// ---------------H5--------------
@@ -392,10 +450,6 @@
 					setTimeout(function() {
 						that.$GrzxInter.navToHome();//返回首页
 					}, 500);
-				} else {
-					uni.navigateTo({
-						url: that.$GrzxInter.Route.personal.url,
-					})
 				}
 				//#endif
 			},
@@ -695,19 +749,13 @@
 	}
 
 	.fontClass {
-		font-size: 20upx;
-		color: #FFFFFF;
-		line-height: 42upx;
-		height: 42upx;
-		position: absolute;
-		left: 34upx;
-		top: 1upx;
-		/* #ifdef H5 */
-		top: -3upx;
-		/* #endif */
-		/* #ifndef H5 */
-		top: 1upx;
-		/* #endif */
+		padding: 30upx 0;
+		color: #333333;
+		margin-left: 3%;
+		font-size: 32upx;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 
 	.editClass {
@@ -720,13 +768,14 @@
 
 	.myBox {
 		//包括我的收藏，我的订单，我的历史
-		width: 91.47%;
+		width: 100%;
 		height: 170upx;
-		margin-left: 4.27%;
-		margin-top: 40upx;
+		margin-left: 0%;
+		margin-top: 0upx;
 		display: flex;
 		flex-direction: row;
 		background-color: #FFFFFF;
+		margin-top: 20upx;
 	}
 
 	.collection {
@@ -739,9 +788,9 @@
 
 	.imgStyle1 {
 		width: 61upx;
-		height: 59upx;
+		height: 61upx;
 		margin-top: 31upx;
-		margin-left: 36.68%;
+		margin-left: 34.68%;
 	}
 
 	.order {
@@ -833,9 +882,10 @@
 
 	.itemClass {
 		// border: 1upx solid black;
+		width: 100%;
+		background-color: #FFFFFF;
 		display: flex;
-		flex-direction: column; //column:纵向排列，row横向排列
-		padding-bottom: 30upx;
+		flex-direction: row; //column:纵向排列，row横向排列
 	}
 
 	//图标样式开始
@@ -1003,6 +1053,21 @@
 	.orderClasss{
 		margin-top: 20upx;
 		margin-left: 5%;
+	}
+	.bt {
+		border-bottom: 1upx solid #DFDFDF;
+	}
+	.rightClass1 {
+		width: 30upx;
+		height: 30upx;
+		margin-left: 70%;
+		margin-top: 42upx;
+	}
+	.ml{
+		margin-left: 71.5%;
+	}
+	.ml1{
+		margin-left: 76.5%;
 	}
 	// .contactClass::after{
 	// 	border: none; 
