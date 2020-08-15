@@ -344,7 +344,7 @@
 							ItemTitle: "景区门票"
 						},
 						{
-							IsUse: true,
+							IsUse: false,
 							clickURL: "../../pages_CTKY/pages/CTKY/SpecialBus/Home/specialBusHome",
 							ImageURL: "../../static/Home/serve/jqgoupiao.png",
 							// ImageURL: "../../static/Home/serve/jqgoupiao2.png",
