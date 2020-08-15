@@ -2,7 +2,7 @@
 	<!-- 班次列表 -->
 	<view class="myView">
 		<!-- 顶部时间选项卡 -->
-		<view class="headerClass">
+		<view class="headerClass" v-if="false">
 			<scroll-view class="scrollClass" scroll-x>
 				<view class="blockClass" :class="selectIndex == index ? 'viewPress': '' " v-for="(item,index) in dateArray" :key="index"
 				 @click="viewClick(index,item)" v-model="selectIndex">
@@ -54,19 +54,19 @@
 						<view style="margin-left: 16upx;font-size: 30upx;font-style:SourceHanSansSC-Regular ;
 						color: #333333;">{{item.endStation}}</view>
 					</view>
-					<view style="margin-right: 28upx;font-size: 24upx;font-style:
-					SourceHanSansSC-Light; color: #666666;">余{{item.remainingVotes}}张</view>
+					<!-- <view style="margin-right: 28upx;font-size: 24upx;font-style:
+					SourceHanSansSC-Light; color: #666666;">余{{item.remainingVotes}}张</view> -->
 				</view>
 
+				<!-- <view style="margin-left: 25upx;margin-bottom: 20upx;font-style: SourceHanSansSC-Light;font-weight: lighter;
+				font-size: 28upx;color: #AAAAAA;margin-top: 6upx;font-weight: bold;"
+				 v-if="item.shuttleType == '普通班车'">{{item.carType}} / 约{{(item.duration.slice(0,-2))}}分钟 / {{item.planScheduleCode}}</view>
 				<view style="margin-left: 25upx;margin-bottom: 20upx;font-style: SourceHanSansSC-Light;font-weight: lighter;
 				font-size: 28upx;color: #AAAAAA;margin-top: 6upx;font-weight: bold;"
-				 v-if="item.shuttleType == '普通班车'">{{item.carType}} | 约{{(item.duration.slice(0,-2))}}分钟 | {{item.planScheduleCode}}</view>
-				<view style="margin-left: 25upx;margin-bottom: 20upx;font-style: SourceHanSansSC-Light;font-weight: lighter;
-				font-size: 28upx;color: #AAAAAA;margin-top: 6upx;font-weight: bold;"
-				 v-if="item.shuttleType == '定制班车'">{{item.carType}} | 约{{(item.duration.slice(0,-2))}}分钟 | {{item.planScheduleCode}}</view>
+				 v-if="item.shuttleType == '定制班车'">{{item.carType}} / 约{{(item.duration.slice(0,-2))}}分钟 / {{item.planScheduleCode}}</view>
 				<view style="margin-left: 25upx;margin-bottom: 20upx;font-style: SourceHanSansSC-Light;font-weight: lighter;
 				 font-size: 28upx;color: #AAAAAA;margin-top: 6upx;font-weight: bold;"
-				 v-if="item.shuttleType == '定制巴士'">{{item.SetoutTimeDesc}}</view>
+				 v-if="item.shuttleType == '定制巴士'">{{item.SetoutTimeDesc}}</view> -->
 
 				<!-- 途径站点 -->
 				<!-- <view class="st_routeSite">
@@ -526,7 +526,9 @@
 					data: item,
 					success() {
 						uni.navigateTo({
-							url: './scheduleDetails'
+							url: './scheduleDetails',
+							animationDuration:1000,
+							animationType:'fade-in'
 						})
 					},
 					fail() {
@@ -838,10 +840,10 @@
 	}
 
 	.ctky_View {
-		width: 94%;
+		// width: 94%;
 		background: #FFFFFF;
-		margin: 16upx 3%;
-		border-radius: 20upx;
+		margin: 16upx 0;
+		// border-radius: 20upx;
 		display: flex;
 		justify-content: space-between;
 	}

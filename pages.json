@@ -284,7 +284,9 @@
 				}, {
 					"path": "pages/CTKY/TraditionSpecial/PayMent/orderPayment",
 					"style": {
-						"navigationStyle": "custom"
+						// "navigationStyle": "custom",
+						"navigationBarBackgroundColor": "#ff961e",
+						"navigationBarTitleText": "下单"
 					}
 				}, {
 					"path": "pages/CTKY/TraditionSpecial/stationPicker/selectStation", //上下车点选择

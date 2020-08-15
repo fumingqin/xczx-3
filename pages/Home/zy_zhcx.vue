@@ -40,6 +40,8 @@
 							 lazy-load="true"></image>
 							<image v-if="ArrItem.ItemTitle =='村村通'" style="width: 68upx;height: 68upx;" mode="aspectFit" :src="ArrItem.ImageURL"
 							 lazy-load="true"></image>
+							 <image v-if="ArrItem.ItemTitle =='定制巴士'" style="width: 68upx;height: 68upx;" mode="aspectFit" :src="ArrItem.ImageURL"
+							  lazy-load="true"></image>
 							<text class="itemText">{{ArrItem.ItemTitle}}</text>
 						</view>
 					</view>
@@ -340,7 +342,14 @@
 							ImageURL: "../../static/Home/serve/jqgoupiao.png",
 							// ImageURL: "../../static/Home/serve/jqgoupiao2.png",
 							ItemTitle: "景区门票"
-						}]
+						},
+						{
+							IsUse: true,
+							clickURL: "../../pages_CTKY/pages/CTKY/SpecialBus/Home/specialBusHome",
+							ImageURL: "../../static/Home/serve/jqgoupiao.png",
+							// ImageURL: "../../static/Home/serve/jqgoupiao2.png",
+							ItemTitle: "定制巴士"
+						}],
 					},
 				],
 				// swiperItem: [ //菜单栏
@@ -461,7 +470,7 @@
 						that.version = inf.version; //获取当前版本号
 						setTimeout(function() {
 							//检测升级
-							that.updateAPP();
+							// that.updateAPP();
 						}, 1500)
 					});
 				}
