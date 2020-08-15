@@ -20,9 +20,9 @@
 			<!-- <button type="warn" @click="addPassenger" class="btnAdd1">添加</button> -->
 			<button @click="definite" class="btnDefinite">已选好</button>
 		</view>
-		<view class="returnBox" @click="returnPages">
-			<image class="returnClass" src="../../static/GRZX/btnReturn.png"></image>
-			<view class="titleClass">选择乘客信息</view>
+		<view class="returnBox">
+			<image class="returnClass" src="../../static/GRZX/btnReturn.png" @click="returnPages"></image>
+			<view class="titleClass" @click="returnPages">选择乘客信息</view>
 			<view class="addClass" @click="addPassenger">添加</view>
 		</view>
 	</view>

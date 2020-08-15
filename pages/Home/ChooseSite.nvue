@@ -14,35 +14,35 @@
 							<view style="width: 60rpx;align-items: flex-start">
 								<uni-icons type="arrowleft" size="26" @click="goBack"></uni-icons>
 							</view>
-							<view style="width: 634rpx;background-color: #F7F7F7;flex-direction: row;align-items: center;border-radius: 11rpx;">
+							<view style="width: 634rpx;background-color: #FFB22B;flex-direction: row;align-items: center;border-radius: 11rpx;">
 								<view style="flex-grow:1">
 									<view>
 										<view style="flex-direction: row; align-items: center;padding-top: 15rpx;">
-											<view style="width: 60rpx;flex-direction: row;justify-content: center;align-items: center;">
+											<!-- <view style="width: 60rpx;flex-direction: row;justify-content: center;align-items: center;">
 												<view class="bluering"></view>
-											</view>
+											</view> -->
 											<view>
-												<input placeholder="请输入起点" style="width: 450rpx;font-size: 30rpx;" :disabled="disabled" @click="selectInitial('qidian')"
+												<input placeholder="请输入或选择起点" style="width: 450rpx;font-size: 30rpx;" :disabled="disabled" @click="selectInitial('qidian')"
 												 v-model="startAddress" />
 											</view>
 										</view>
 									</view>
-									<view style="border-bottom-width: 2rpx;border-color: #EAEAEA;border-style: solid;margin-top: 10rpx;margin-bottom: 10rpx;margin-left: 60rpx;margin-right: 30rpx;"></view>
+									<view style="border-bottom-width: 2rpx;border-color: #FFFFFF;border-style: solid;margin-top: 10rpx;margin-bottom: 10rpx;"></view>
 									<view style="flex-direction: row;align-items: center;padding-bottom: 10rpx;">
-										<view style="width: 60rpx;flex-direction: row;justify-content: center;align-items: center;">
+										<!-- <view style="width: 60rpx;flex-direction: row;justify-content: center;align-items: center;">
 											<view class="redring"></view>
-										</view>
+										</view> -->
 										<view>
-											<input placeholder="请输入终点" style="width: 450rpx;font-size: 30rpx;" :disabled="disabled" @click="selectDestination('zhongdian')"
+											<input placeholder="请输入或选择终点" style="width: 450rpx;font-size: 30rpx;" :disabled="disabled" @click="selectDestination('zhongdian')"
 											 v-model="endAddress" />
 										</view>
 									</view>
 								</view>
 								<view style="flex-direction: row;align-items: center;padding-right: 20rpx;">
-									<image src="../../static/Home/exchange.png" style="height: 40rpx;width: 40rpx;" @click="exchange"></image>
+									<image src="../../static/Home/exchange.png" style="height: 50rpx;width: 50rpx;" @click="exchange"></image>
 								</view>
 								<view style="flex-direction: row;align-items: center;padding-right: 20rpx;">
-									<image src="../../static/Home/Search.png" style="height: 40rpx;width: 40rpx;" @click="search"></image>
+									<image src="../../static/Home/Search.png" style="height: 50rpx;width: 50rpx;" @click="search"></image>
 								</view>
 							</view>
 						</view>
@@ -206,58 +206,58 @@
 			<view v-if="current == 2">
 				<map id='map1' ref="map1" :style="{height:mapheight}" style="width: 750rpx;" :longitude="startLon" :latitude="startLat"
 				 :polyline="polyline" :show-location="showlocation" :markers="markers"></map>
-				<view style="width: 698rpx;background-color: #FFFFFF;position: fixed;bottom: 40rpx;left: 26rpx;right: 26rpx;border-radius: 12rpx;"
+				<view style="width: 752rpx;background-color: #FFFFFF;position: fixed;top: 260rpx;"
 				 v-if="IsSearch">
 					<view style="margin:20rpx;">
 						<view style="height: 80rpx;flex-direction: row;border-bottom-width: 1px;border-color: #EAEAEA;">
-							<button class="bt_now" @click="click_btnow"><text style="font-size: 30rpx;" :class="IsClick ? 'bt_text' : ''">现在</text></button>
-							<button class="bt_booking" @click="click_btbooking"><text style="font-size: 30rpx;" :class="IsClick ? '' : 'bt_text'">预约</text></button>
+							<button class="bt_now" @click="click_btnow"><text style="font-size: 30rpx;" :class="IsClick ? 'bt_text' : ''">实时车</text></button>
+							<button class="bt_booking" @click="click_btbooking"><text style="font-size: 30rpx;" :class="IsClick ? '' : 'bt_text'">预约车</text></button>
 						</view>
-						<view style="flex-direction: row;justify-content: space-between;margin-top: 30rpx;margin-bottom: 30rpx;" v-if="!IsClick">
-							<view style="flex-direction: row;justify-content: center;align-items: center;width: 329rpx;border-right-width: 1px;border-color: #EAEAEA;">
+						<view style="justify-content: space-between;margin-top: 30rpx;margin-bottom: 30rpx;" v-if="!IsClick">
+							<view style="flex-direction: row;justify-content: center;align-items: center;width: 329rpx;border-right-width: 1px;border-color: #EAEAEA;margin-left: 200rpx;">
 								<!-- <text style="font-size: 28rpx;">预约时间</text> -->
 								<hTimePicker interval="5" @changeTime="changeTime">
 									<view slot="pCon" class="changeTime">
-										<text style="font-size: 28rpx;">{{selecttime}}</text>
+										<text style="font-size: 30rpx;">{{selecttime}}</text>
 									</view>
 								</hTimePicker>
-								<uni-icons type="arrowright" size="19"></uni-icons>
+								<!-- <uni-icons type="arrowright" size="19"></uni-icons> -->
 							</view>
-							<view style="flex-direction: row;justify-content: center;align-items: center;width: 329rpx;flex-wrap: wrap;"
+							<view style="flex-direction: row;justify-content: center;align-items: center;width: 329rpx;flex-wrap: wrap;margin-left: 200rpx;margin-top: 25rpx;"
 							 @click="selectPassenger">
 								<view style="flex-direction: row;align-items: center;justify-content: center;" v-for="(item,index) in Passenger"
 								 :key="index">
-									<text style="font-size: 28rpx;color: #color: #FFB22B;;">{{item.userName}} </text>
+									<text style="font-size: 30rpx;color: #color: #FFB22B;;">{{item.userName}} </text>
 									<text v-if="index!=(Passenger.length-1)">,</text>
 								</view>
-								<uni-icons type="arrowright" size="19"></uni-icons>
+								<!-- <uni-icons type="arrowright" size="19"></uni-icons> -->
 							</view>
 						</view>
 						<view style="height: 97rpx;flex-direction: row;justify-content: center;" v-if="IsClick" @click="selectPassenger">
 							<view style="flex-direction: row;justify-content: center;align-items: center;">
 								<view style="flex-direction: row;align-items: center;justify-content: center;" v-for="(item,index) in Passenger"
 								 :key="index">
-									<text style="font-size: 28rpx;">{{item.userName}} </text>
+									<text style="font-size: 30rpx;">{{item.userName}} </text>
 									<text v-if="index!=(Passenger.length-1)">,</text>
 								</view>
-								<uni-icons type="arrowright" size="19"></uni-icons>
+								<!-- <uni-icons type="arrowright" size="19"></uni-icons> -->
 							</view>
 						</view>
-						<view style="padding-top: 20rpx;flex-direction: row;justify-content: space-between;border-top-width: 1px;border-color:#EAEAEA;">
+						<view style="padding-top: 20rpx;flex-direction: row;justify-content: space-between;border-color:#EAEAEA;margin-left: 200rpx;">
 							<view style="align-items: center;justify-content: center;flex-direction: row;">
-								<image src="../../static/Home/car1.png" style="width: 194rpx;height: 70rpx;"></image>
+								<image src="../../static/Home/car1.png" style="width: 160rpx;height: 100rpx;"></image>
 								<view>
-									<text style="font-size: 28rpx;">{{vehicleType}}</text>
+									<text style="font-size: 30rpx;">{{vehicleType}}</text>
 								</view>
 							</view>
-							<view style="align-items: center;justify-content: center;flex-direction: row;">
-								<text style="font-size: 30rpx;font-weight: 300;">预估&nbsp;&nbsp;</text>
-								<text style="font-size: 36rpx;padding-right: 20rpx;font-weight: 300;">{{estimatePrice}}&nbsp;元</text>
-							</view>
+						</view>
+						<view style="align-items: center;justify-content: center;flex-direction: row;margin-top: 25rpx;">
+							<text style="font-size: 30rpx;font-weight: 300;">预估价格&nbsp;&nbsp;</text>
+							<text style="font-size: 30rpx;padding-right: 20rpx;font-weight: 300;">{{estimatePrice}}&nbsp;元</text>
 						</view>
 						<view style="margin-top: 40rpx;align-items: center;">
 							<button @click="promptlyCall" style="width: 640rpx;height: 84rpx;background-color:#FFB22B;border-radius:12rpx;border-color:#FFB22B;line-height: 84rpx;">
-								<text style="color: #FFFFFF;font-size: 34rpx;">立即呼叫</text>
+								<text style="color: #FFFFFF;font-size: 36rpx;">立即呼叫</text>
 							</button>
 						</view>
 					</view>
@@ -345,7 +345,7 @@
 				selecttime: "点击选择时间",
 				county: '',
 				Passenger: [{
-					userName: "选择乘车人"
+					userName: "点击选择乘车人"
 				}],
 				downwindCar: [], //顺风车
 				privateTaxi: [],
