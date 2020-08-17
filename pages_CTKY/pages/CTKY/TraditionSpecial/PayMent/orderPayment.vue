@@ -355,6 +355,7 @@
 				// #ifdef MP-WEIXIN
 				companyCode = $KyInterface.KyInterface.systemName.systemNameNPWeiXin;
 				// #endif
+				
 				//--------------------------发起下单请求-----------------------
 				uni.showLoading({
 				    title: '正在下单...'
