@@ -802,7 +802,7 @@
 					key: 'userInfo',
 					success: (res) => {
 						if (res.data.phoneNumber != "") {
-							that.GetUserLastLoginTime(res.data.phoneNumber);
+							//that.GetUserLastLoginTime(res.data.phoneNumber);
 						}
 					}
 				})
