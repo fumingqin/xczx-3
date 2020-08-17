@@ -1,122 +1,12 @@
 <template>
 	<view>
-		<!-- 搜索栏 -->
-		<view class="searchTopBox">
-			<text class="locationTxt" @click="oncity">{{regionWeixin}}<text class="icon jdticon icon-xia"></text></text>
-			<view class="searchBoxRadius">
-				<input class="inputIocale" type="search" v-model="searchValue" @confirm="searchNow" placeholder="搜索景区名称" />
-				<image class="searchImage" src="../../../static/LYFW/currency/search.png" />
+		
+		<view>
+			<view  class="tab-item" v-for="(item,index) in scenicList" :key="index" @click="godetail(item.ticketId)" style="display: flex;flex-direction: row;justify-content: space-between;">
+				<text>{{item.ticketTitle}}</text>
+				<text>{{item.ticketAdultPrice}}起</text>
 			</view>
 		</view>
-
-		<popup-layer ref="popupRef" :direction="'right'">
-			<view style="width:750upx;height: 100%;">
-				<citySelect @back_city="backCity"></citySelect>
-			</view>
-		</popup-layer>
-
-		<!-- 搜索内容 -->
-		<view :hidden="searchIndex==0" v-for="(item,index) in searchData" :key="index">
-			<view class="Tk_scrollview" @click="godetail(item.ticketId)">
-				<view class="Tk_item">
-					<image class="Tk_image" :src="item.ticketImage[0]" />
-					<view class="Tk_bacg">
-						<text class="Tk_text1">{{item.ticketTitle}}</text>
-						<view style="display: flex;">
-							<text class="Tk_text2" v-for="(item2,index2) in item.ticketComment" :key="index2">{{item2}}</text>
-						</view>
-						<text class="Tk_text3">{{priceConversion(item.ticketAdultPrice)}}</text>
-
-					</view>
-				</view>
-			</view>
-		</view>
-
-
-		<!-- 六宫格景区 -->
-		<!-- 命名：six -->
-		<view class="currencyTitle">热门景点</view>
-		<view class="sixBackground">
-			<view v-for="(item,index) in sixPalaceList" v-if="index < 6" :key="index" @click="godetail(item.ticketId)">
-				<view class="darkCurtain"></view>
-				<image :src="item.ticketImage[0]"></image>
-				<view class="sixView">
-					<text class="sixText1">{{item.ticketName}}</text>
-					<text class="sixText2" :hidden="item.ticketEnglishName==''">{{item.ticketEnglishName}}</text>
-				</view>
-			</view>
-		</view>
-
-
-		<!-- 筛选列表 -->
-		<view class="screenView">
-			<view class="screenText" :class="{current: screenIndex === 0}" @click="tabClick(0)">
-				综合排序
-			</view>
-			<view class="screenText" :class="{current: screenIndex === 1}" @click="tabClick(1)">
-				销量优先
-			</view>
-			<view class="screenText" :class="{current: screenIndex === 2}" @click="tabClick(2)">
-				<text>价格</text>
-				<view class="priceView">
-					<text :class="{active: priceOrder === 1 && screenIndex === 2}" class="jdticon icon-shang"></text>
-					<text :class="{active: priceOrder === 2 && screenIndex === 2}" class="jdticon icon-shang xia"></text>
-				</view>
-			</view>
-			<text :class="{active:screenIndex === 3}" class="cate-item jdticon icon-fenlei1" @click="toggleCateMask('show')"></text>
-		</view>
-
-		<!-- 景区列表 -->
-		<view :hidden="screenIndex == 3">
-			<view class="Tk_scrollview" v-for="(item,index) in scenicList" :key="index" v-if="index < scenicListIndex " @click="godetail(item.ticketId)">
-				<view class="Tk_item">
-					<image class="Tk_image" :src="item.ticketImage[0]" />
-					<view class="Tk_bacg">
-						<text class="Tk_text1">{{item.ticketTitle}}</text>
-						<view style="display: flex;">
-							<text class="Tk_text2" v-for="(item2,index2) in item.ticketComment" :key="index2">{{item2}}</text>
-						</view>
-						<text class="Tk_text3">{{priceConversion(item.ticketAdultPrice)}}</text>
-					</view>
-				</view>
-			</view>
-			<view style="text-align: center; padding: 24upx 0; margin-bottom: 48upx; font-size: 28upx; color: #aaa;">
-				<text>{{loadingType=== 0 ? loadingText.down : (loadingType === 1 ? loadingText.refresh : loadingText.nomore)}}</text>
-			</view>
-		</view>
-
-		<!-- 筛选的景区列表 -->
-		<view :hidden="screenIndex !== 3 ">
-			<view class="Tk_scrollview" v-for="(item,index) in scenicListCate" :key="index" @click="godetail(item.ticketId)">
-				<view class="Tk_item">
-					<image class="Tk_image" :src="item.ticketImage[0]" />
-					<view class="Tk_bacg">
-						<text class="Tk_text1">{{item.ticketTitle}}</text>
-						<view style="display: flex;">
-							<text class="Tk_text2" v-for="(item2,index2) in item.ticketComment" :key="index2">{{item2}}</text>
-						</view>
-						<text class="Tk_text3">{{priceConversion(item.ticketAdultPrice)}}</text>
-					</view>
-				</view>
-			</view>
-		</view>
-
-		<!-- 分类面板 -->
-		<view class="cate-mask" :class="cateMaskState===0 ? 'none' : cateMaskState===1 ? 'show' : ''" @click="toggleCateMask">
-			<view class="cate-content">
-				<scroll-view scroll-y class="cate-list">
-					<view v-for="item in cateList" :key="item.id">
-						<view class="cate-item b-b two">{{item.name}}</view>
-						<view v-for="tItem in item.child" :key="tItem.id" class="cate-item b-b" :class="{active: tItem.id==cateId}"
-						 @click="changeCate(tItem)">
-							{{tItem.name}}
-						</view>
-					</view>
-				</scroll-view>
-			</view>
-		</view>
-
-
 
 	</view>
 </template>
@@ -163,7 +53,6 @@
 		},
 
 		mounted() {
-			this.$refs.popupRef.close();
 		},
 
 		onLoad: function(options) {
@@ -204,7 +93,7 @@
 					url: $lyfw.Interface.spt_GetticketSearchByrequestArea_Six.value,
 					method: $lyfw.Interface.spt_GetticketSearchByrequestArea_Six.method,
 					data: {
-						requestArea: this.regionWeixin,
+						requestArea: '泉州市',
 					},
 					// header: {'content-type': 'application/x-www-form-urlencoded'},
 					success: (res) => {
@@ -236,7 +125,7 @@
 					url: $lyfw.Interface.spt_GetticketSearchByrequestArea.value,
 					method: $lyfw.Interface.spt_GetticketSearchByrequestArea.method,
 					data: {
-						requestArea: this.regionWeixin,
+						requestArea: '泉州市',
 					},
 					// header: {'content-type': 'application/x-www-form-urlencoded'},
 					success: (res) => {
@@ -309,7 +198,6 @@
 
 			//打开地区选择器
 			oncity() {
-				this.$refs.popupRef.show();
 			},
 
 			//地区获取
@@ -317,7 +205,6 @@
 				if (e !== 'no' && e !== 'yes') {
 					// console.log(e)
 					this.regionWeixin = e.cityName
-					this.$refs.popupRef.close();
 					this.lyfwData();
 					this.screenIndex = 0;
 					this.searchIndex = 0;
@@ -344,9 +231,7 @@
 						}
 					})
 					// #endif
-					this.$refs.popupRef.close();
 				} else {
-					this.$refs.popupRef.close();
 				}
 			},
 
@@ -586,6 +471,12 @@
 </script>
 
 <style lang="scss">
+	
+	.tab-item{
+		padding: 20rpx;
+		border-bottom: #000000 1px solid;
+	}
+	
 	//搜索框
 	.searchTopBox {
 		display: flex;

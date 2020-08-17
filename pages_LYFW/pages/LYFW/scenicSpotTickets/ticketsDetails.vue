@@ -1,42 +1,42 @@
 <template>
 	<view class="Ly_background">
-		<!-- 顶部轮播图（可点击进入相册并放大） -->
-		<swiper class="swi" circular autoplay>
-			<swiper-item class="swi-item" v-for="(item,index) in piclist" :key="index">
-				<image :src="item" mode="aspectFill" @click="goImgList" />
-				<view class="view">1张图片</view>
-			</swiper-item>
-		</swiper>
-		<view>
-			<!-- 标题、发布时间、点击量、分享 -->
-			<view class="clicks">
-				<text class="title">{{scSpotContent[0].ticketTitle}}</text>
-				<text class="time">开放时间：{{scSpotContent[0].ticketOpenUp}} </text>
-			</view>
+		<view style="width: 100%;height: 150rpx;">
+			
 		</view>
-		<!-- 门票滑块 -->
+		
+		<view class="tab-item" style="text-align: center;">
+			<text>{{scSpotContent[0].ticketTitle}}</text>
+		</view>
+		<view style="border-bottom: #000000 1px solid;"  class="tab-item">
+			<text>开放时间：{{scSpotContent[0].ticketOpenUp}}</text>
+		</view>
+		
 		<!-- 模块命名：Tk -->
 		<view :hidden="admissionTicketStatus == '该景区暂无门票产品信息！'">
-		<scroll-view class="Tk_scrollview" >
-			<view class="tweetsTitle2">门票</view>
-			<view class="Tk_item"  v-for="(item,index) in admissionTicket" :key="index" @click="godetail(item)">
-				<view class="Tk_bacg">
-					<text class="Tk_text1">{{item.admissionTicketName}}</text>
-					<text class="Tk_text3">¥{{item.ticketAdultPrice}}元</text>
-					<text class="Tk_text2">包含：{{item.ticketContain}}</text>
-					<view style="display: block;text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 400upx;">
-						<text class="Tk_text2" v-for="(item2,index2) in item.ticketComment" :key="index2" >{{item2}}&nbsp;|&nbsp;</text>
-					</view>
-					<view class="Tk_butter">立即预订</view>
+			<view class="tab-item" style="border-bottom: #000000 1px solid;" v-for="(item,index) in admissionTicket" :key="index" @click="godetail(item)">
+				<view style="text-align: center;">
+					<text>{{item.admissionTicketName}}</text>
+				</view>
+				<view>
+					<text>¥{{item.ticketAdultPrice}}元</text>
+				</view>
+				<view>
+					<text>包含：{{item.ticketContain}}</text>
+				</view>
+				<view style="margin-top: 20rpx;">
+					<text style="color: #DD524D;">立即预订</text>
 				</view>
 			</view>
-		</scroll-view>
 		</view>
-
+		
 		<!-- 文章内容 -->
-		<view class="Zj_background">
-			<view class="tweetsTitle">介绍</view>
-			<rich-text class="tweetscontent" :nodes="scSpotContent[0].ticketScenicContent"></rich-text>
+		<view class="tab-item" style="border-bottom: #000000 1px solid;">
+			<view style="text-align: center;">
+				<text>介绍</text>
+			</view>
+			<view>
+				<text>暂无景区介绍</text>
+			</view>
 		</view>
 	</view>
 </template>
@@ -106,7 +106,6 @@
 					},
 					header: {'content-type': 'application/json'},
 					success: (res) => {
-						console.log(res)
 						this.piclist = res.data.data[0].ticketImage;
 						this.scSpotContent = res.data.data;
 						this.admissionTicket = res.data.data;
@@ -176,6 +175,10 @@
 </script>
 
 <style lang="scss">
+	.tab-item{
+		padding: 20rpx;
+	}
+	
 	//页面背景
 	.Ly_background {
 		width: 100%;
