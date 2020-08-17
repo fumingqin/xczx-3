@@ -18,7 +18,7 @@
 			<!-- 按钮颜色和发送验证码的样式 -->
 			<!-- <view class="getCode style1" @click="getCodeClick" id="Code">{{textCode}}</view> -->
 			<text class="fontStyle" @click="loginClick">登录</text>
-			<text class="fontStyle1" @click="returnClick">返回个人中心</text>
+			<text class="fontStyle1" @click="returnClick">返回上一页</text>
 			<!-- <text class="fontStyle" @click="checkRealName('1000067')">确定</text> -->
 		</view>
 
@@ -571,17 +571,7 @@
 
 			//-------------------------------------返回按钮------------------------------------
 			returnClick: function() {
-				var that = this;
-				if(that.urlData == 1){
-					that.$GrzxInter.navToHome();//返回首页
-				}else if (that.urlData == 2) {
-					uni.switchTab({ //返回订单页
-						url: '/pages/order/OrderList',
-					})
-				} else {
-					console.log("返回上一页")
-					uni.navigateBack(); //返回上一页
-				}
+				uni.navigateBack(); //返回上一页
 			},
 
 			//-----------------------------------判断是否为base64格式----------------------------

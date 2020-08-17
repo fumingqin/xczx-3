@@ -93,9 +93,9 @@
 				uni.request({
 					url:$KyInterface.KyInterface.Ky_AddPicture.Url,
 					method:$KyInterface.KyInterface.Ky_AddPicture.method,
-					header:$KyInterface.KyInterface.Ky_AddPicture.header,
+					// header:$KyInterface.KyInterface.Ky_AddPicture.header,
 					data:{
-						model:8,
+						model:0,
 					},
 					success(res) {
 						console.log(res)

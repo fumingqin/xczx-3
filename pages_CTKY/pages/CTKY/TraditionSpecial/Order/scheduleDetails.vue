@@ -21,10 +21,10 @@
 						
 					</view>
 					<!-- 车型-儿童半价 -->
-					<view class="ticketContent">
+					<!-- <view class="ticketContent">
 						<view class="textCLass" style="font-size: 24upx;color: #999999;">{{ticketDetail.carType}}&nbsp;&nbsp;{{ticketDetail.planScheduleCode}}</view>
 						<view class="textCLass" style="font-size: 24upx;font-style: SourceHanSansSC-Light; color: #666666;">余{{ticketDetail.remainingVotes}}张</view>
-					</view>
+					</view> -->
 				</view>
 			</view>
 
@@ -38,13 +38,13 @@
 			</view> -->
 
 			<!-- 查看所有途经点 -->
-			<view class="orderCommonClass" @tap="approachPoint">
+			<!-- <view class="orderCommonClass" @tap="approachPoint">
 				<view style="margin-left: 41upx;margin-top: 35upx;margin-bottom: 35upx;font-size:SourceHanSansSC-Regular ;color: #2C2D2D;font-size: 30upx;">查看所有途经点</view>
 				<view style="display: flex;margin-right: 41upx;align-items: center;">
 					<view style="font-size: 28upx;font-family: SourceHanSansSC-Light;color: #999999;">{{routeSite.length}}个站点</view>
 					<image src="../../../../static/CTKY/right.png" style="width: 11upx;height: 21upx;margin-left: 10upx;"></image>
 				</view>
-			</view>
+			</view> -->
 
 			<!-- 上下车点选择,0是普通购票不显示上下车点选择 -->
 			<!-- v-if="ticketDetail.shuttleType == '定制班车'" -->
@@ -79,12 +79,15 @@
 
 			<!-- 乘车人信息 -->
 			<view class="orderCommonClass" style="flex-direction: column;padding-bottom: 25upx;">
-				<view style="margin-top: 35upx;margin-bottom: 35upx;margin-left: 41upx;font-size:SourceHanSansSC-Regular ;color: #2C2D2D;font-size: 30upx;">乘车人信息</view>
-				<view style="display: flex;margin-bottom: 35upx;">
-					<!-- <button @tap="addPassenger('成人')" class="button_1"  style="border: #AAAAAA 1px solid;padding: 0 40rpx;height: 66upx;align-items: center;font-size: 25upx; color:#2C2D2D ;text-align: center;background: #FFFFFF;">添加成人/儿童</button> -->
-					<button @tap="pickPassenger" class="button_1" style="border: #AAAAAA 1px solid;font-size: 25upx; color:#2C2D2D ;text-align: center;background: #FFFFFF;margin-left: 168upx;margin-right: 22upx;">选择乘客</button>
-					<button @tap="addPassenger('免童')" class="button_1" style="border: #AAAAAA 1px solid;font-size: 25upx; color:#2C2D2D ;text-align: center;background: #FFFFFF;margin-left: 22upx;">携带免童</button>
+				<view style="display: flex; align-items: center;">
+					<view style="margin-top: 35upx;margin-bottom: 35upx;margin-left: 41upx;font-size:SourceHanSansSC-Regular ;color: #2C2D2D;font-size: 30upx;">乘车人信息</view>
+					<view style="display: flex;margin-bottom: 35upx;margin-top: 35upx;">
+						<!-- <button @tap="addPassenger('成人')" class="button_1"  style="border: #AAAAAA 1px solid;padding: 0 40rpx;height: 66upx;align-items: center;font-size: 25upx; color:#2C2D2D ;text-align: center;background: #FFFFFF;">添加成人/儿童</button> -->
+						<button @tap="pickPassenger" class="button_1" style="border: #AAAAAA 1px solid;font-size: 25upx; color:#2C2D2D ;text-align: center;background: #FFFFFF;margin-left: 168upx;margin-right: 22upx;">选择乘客</button>
+						<!-- <button @tap="addPassenger('免童')" class="button_1" style="border: #AAAAAA 1px solid;font-size: 25upx; color:#2C2D2D ;text-align: center;background: #FFFFFF;margin-left: 22upx;">携带免童</button> -->
+					</view>
 				</view>
+				
 				<view style="flex-direction: column;background: #FFFFFF; " v-for="(items,index) in passengerInfo" :key=index
 				 v-model="passengerInfo">
 					<view class="passengerInfoDetail">
@@ -187,9 +190,9 @@
 					<radio class="Mp_box" value="1" :color="'#01aaef'" :checked="selectedValue===1 ? true : false" @click="Selection"></radio>
 				</view>
 			</view>
-			<view style="display: flex;font-size: 24upx;margin:0 46upx;color: #808080;margin-left: 16%;margin-bottom: 50upx;">点击立即预定表示已阅读并同意<view
+			<!-- <view style="display: flex;font-size: 24upx;margin:0 46upx;color: #808080;margin-left: 16%;margin-bottom: 50upx;">点击立即预定表示已阅读并同意<view
 				 style="font-size: 24upx;color: #01aaef;" @tap="checkAttention"> 《购票须知》</view>
-			</view>
+			</view> -->
 		</scroll-view>
 		<view class="toPayClass">
 			<view style="display: flex;align-items: center;margin-left: 32upx;">
@@ -260,7 +263,6 @@
 				InsurePrice: '0', //保险价格
 				adultNum: 0, //成人数
 				applyName: '',
-				shuttleType: '',
 				mainArray: [],
 				approachPoint1: '', //终点
 				approachPoint2: '', //起点
@@ -899,8 +901,8 @@
 	//订单提交通用块
 	.orderCommonClass {
 		background: #FFFFFF;
-		border-radius: 14upx;
-		margin: 0 26upx;
+		// border-radius: 14upx;
+		// margin: 0 26upx;
 		margin-bottom: 20upx;
 		display: flex;
 		justify-content: space-between;

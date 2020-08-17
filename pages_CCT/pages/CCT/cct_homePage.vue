@@ -323,13 +323,13 @@
 	.queryTickets {
 		// background: #FFFFFF;
 		// height: 466upx;
-		width: 706upx;
+		// width: 706upx;
 		margin-top: 10upx;
 		margin-bottom: 10upx;
 		margin: 0 auto; //左右边距自适应
 		position: relative;
 		top: -90upx;
-		border-radius: 20upx;
+		// border-radius: 20upx;
 	}
 	//选择车票类型 普通购票/定制购票
 	.typePickerView {

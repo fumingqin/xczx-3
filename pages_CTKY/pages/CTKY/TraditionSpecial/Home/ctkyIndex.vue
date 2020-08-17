@@ -2,7 +2,7 @@
     <view class="myView">
 		<!-- 照片背景图 -->
 		<view>
-			<image :src="imageUrl" class="imageTop" mode="aspectFill"></image>
+			<image class="imageTop" mode="aspectFill"></image>
 			<!-- <image src="../../static/index/左-箭头.png" class="imageReturn"></image> -->
 		</view>
 		<!-- 车票查询 -->
@@ -242,7 +242,9 @@
 					}else{
 						var params='../Order/selectTickets?&startStation=' + this.departure +'&endStation=' + this.destination + '&date=' + this.datestring + '&isNormal=' + this.isNormal;
 						uni.navigateTo({ 
-							url:params
+							url:params,
+							animationDuration:1500,
+							animationType:'fade-in'
 						})
 					}
 				}
@@ -315,7 +317,7 @@
 	// 背景图片
 	.imageTop {
 		width: 100%;
-		height: 390upx;
+		height: 100upx;
 	}
 
 	.imageReturn {
@@ -328,15 +330,13 @@
 
 	//查询车票整块
 	.queryTickets {
-		// background: #FFFFFF;
-		// height: 466upx;
-		width: 706upx;
+		// width: 706upx;
 		margin-top: 10upx;
 		margin-bottom: 10upx;
 		margin: 0 auto; //左右边距自适应
 		position: relative;
 		top: -90upx;
-		border-radius: 20upx;
+		// border-radius: 20upx;
 	}
 	//选择车票类型 普通购票/定制购票
 	.typePickerView {
@@ -434,7 +434,7 @@
 		background: #ff961e;
 		color: #FFFFFF;
 		font-size: 32upx;
-		border-radius: 10upx;
+		border-radius: 42upx;
 	}
 	
 	//查询视图

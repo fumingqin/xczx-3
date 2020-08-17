@@ -364,6 +364,7 @@
 						executeScheduleID:that.ScheduleID
 					},
 					success(res) {
+						console.log('价格',res)
 						if(res.data.Successed == true){
 							for(let i = 0; i < res.data.ScheduleForSell.length;i++){
 								var array = {

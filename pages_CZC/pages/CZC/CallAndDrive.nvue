@@ -19,15 +19,15 @@
 			<!-- 司机前往乘客地 -->
 			<view elevation='5px' class="comeTopContent">
 				<view style="flex-direction: row; ">
-					<image src="../../static/CZC/HeadPhoto.png" style="width: 100rpx;height: 100rpx;">
-					</image>
-					<view style="width: 470rpx;margin-left: 30rpx;">
-						<view style="width: 470rpx;">
-							<text class="driverNameText">{{driverName}}</text>
+					<!-- <image src="../../static/CZC/HeadPhoto.png" style="width: 100rpx;height: 100rpx;">
+					</image> -->
+					<view style="width: 500rpx;margin-left: 30rpx;">
+						<view style="width: 500rpx;display: flex;flex-direction: row;">
+							<text class="driverNameText">司机名:{{driverName}}</text>
 						</view>
-						<view style="width: 470rpx;flex-direction:row;margin-top: 20rpx;">
-							<view style="width: 200rpx;">
-								<text class="fontClass-30">{{vehicleNumber}}</text>
+						<view style="width: 500rpx;flex-direction:row;margin-top: 20rpx;">
+							<view style="width: 500rpx;">
+								<text class="driverNameText">车牌号:{{vehicleNumber}}</text>
 							</view>
 							<view style="width: 200rpx;">
 								<!-- <text class="fontClass-30">豪华SUV</text> -->
@@ -41,11 +41,17 @@
 					<text class="fontClass-28" style="color: #FFB22B;">上车地点：{{StartAddress}} </text>
 					<view><text class="fontClass-28">司机已接单,请提前前往上车点等候</text></view>
 				</view>
-				<view v-if="state == 2" style="margin-top: 30rpx;border-top:1px solid #EAEAEA;padding-top: 30rpx;">
-					<text class="fontClass-28" style="color: #FFB22B;">司机距离您的位置{{distance}}公里，预计{{duration}}分钟到达出发点。</text>
+				<view v-if="state == 2" style="border-top:1px solid #EAEAEA;padding-top: 10rpx;margin-left: 30rpx;">
+					<text class="fontClass-28" style="color: #FFB22B;">司机距离您的位置{{distance}}公里</text>
 				</view>
-				<view v-if="state == 4" style="margin-top: 30rpx;border-top:1px solid #EAEAEA;padding-top: 30rpx;">
-					<text class="fontClass-28" style="color: #FFB22B;">距离目的地大约{{distance}}公里，预计{{duration}}分钟到达目的地。</text>
+				<view v-if="state == 2" style="border-top:1px solid #EAEAEA;margin-left: 30rpx;">
+					<text class="fontClass-28" style="color: #FFB22B;">预计{{duration}}分钟到达出发点</text>
+				</view>
+				<view v-if="state == 4" style="border-top:1px solid #EAEAEA;padding-top: 10rpx;margin-left: 30rpx;">
+					<text class="fontClass-28" style="color: #FFB22B;">距离目的地大约{{distance}}公里</text>
+				</view>
+				<view v-if="state == 4" style="border-top:1px solid #EAEAEA;margin-left: 30rpx;">
+					<text class="fontClass-28" style="color: #FFB22B;">预计{{duration}}分钟到达目的地</text>
 				</view>
 			</view>
 			<!-- #ifdef MP-WEIXIN -->
@@ -59,7 +65,7 @@
 			</view> -->
 			<!-- #endif -->
 		</view>
-		<view v-if='state == 2' style="width: 750rpx;position: fixed;top: 220px;left: 0px;right: 0px;align-items: center;">
+		<view v-if='state == 2' style="width: 750rpx;position: fixed;top: 180px;left: 0px;right: 0px;align-items: center;">
 			<!-- 司机前往乘客地 -->
 			<view class="comeBottomContent">
 				<view @click="callPolice" style="width: 300rpx;align-items: center;border-right:1px solid #2C2D2D;">
@@ -69,8 +75,8 @@
 					<text class="cancle">取消订单</text>
 				</view>
 			</view>
-			<view elevation='0px' style="flex-direction: row;align-items: flex-start;justify-content: flex-start;width: 600rpx;margin-bottom: 30rpx;" >
-				<image @click="openContactPopup" src="../../../static/Home/contact.png" style="width: 120rpx;height: 120rpx;"></image>
+			<view elevation='0px' style="flex-direction: row;align-items: flex-start;justify-content: flex-start;width: 600rpx;margin-top: 700rpx;margin-left: 450rpx;" >
+				<image @click="openContactPopup" src="../../../static/Home/contact.png" style="width: 120rpx;height: 120rpx;background-color: #FFFFFF;border-radius: 20rpx;"></image>
 			</view>
 		</view>
 		<view v-if='state == 1' style="width: 750rpx;position: fixed;bottom: 40px;left: 0px;right: 0px;align-items: center;">
@@ -81,10 +87,10 @@
 				</view>
 			</view>
 		</view>
-		<view v-if='state == 4' style="width: 750rpx;position: fixed;bottom: 40px;left: 0px;right: 0px;">
+		<view v-if='state == 4' style="width: 750rpx;position: fixed;bottom: 10px;left: 110px;right: 50px;">
 			<view style="padding-left: 10rpx;flex-direction: row;" elevation='0px'>
-				<image @click="callPolice" src="../../../static/Home/CallPollice.png" style="width: 120rpx;height: 120rpx;"></image>
-				<image @click="openContactPopup" src="../../../static/Home/contact.png" style="width: 120rpx;height: 120rpx;"></image>
+				<image @click="callPolice" src="../../../static/Home/CallPollice.png" style="width: 120rpx;height: 120rpx;background-color: #FFFFFF;border-radius: 20rpx;"></image>
+				<image @click="openContactPopup" src="../../../static/Home/contact.png" style="width: 120rpx;height: 120rpx;background-color: #FFFFFF;border-radius: 20rpx;margin-left: 20rpx;"></image>
 			</view>
 			<view style="align-items: center;height: 300rpx;">
 				<!-- <view elevation='5px' class="orderBottomContent">
@@ -166,7 +172,7 @@
 		<uni-popup ref="contactPopup" :maskClick='true' type="center">
 			<view style="background-color: #FFFFFF;width: 500rpx;padding: 40rpx;border-radius: 20rpx;justify-content: center;">
 				<view style="text-align: center;align-items: center;margin-bottom: 40rpx;">
-					<text style="font-size: 32rpx;;">添加</text>
+					<text style="font-size: 32rpx;;">添加紧急联系人</text>
 				</view>
 				<input v-model="autograph" placeholder='请输入紧急联系人电话' maxlength=11 :focus='inputFocus'/>
 				<button @click="saveContact" style="background-color: #FC4646;margin-top: 40rpx;padding-top: 20rpx;padding-bottom: 20rpx;line-height: 34rpx;">
@@ -1073,9 +1079,8 @@
 	}
 
 	.waitContent {
-		width: 700rpx;
-		background-color: #FFFFFF;
-		border-radius: 9px;
+		background-color: #737373;
+		border-radius: 50%;
 		align-items: center;
 		padding-top: 50rpx;
 		padding-left: 50rpx;
@@ -1087,7 +1092,7 @@
 		width: 700rpx;
 		background-color: #FFFFFF;
 		padding: 30rpx;
-		border-radius: 9px;
+		/* border-radius: 9px; */
 	}
 
 	.comeBottomContent {
@@ -1128,7 +1133,7 @@
 		font-size: 32rpx;
 		font-family: Source Han Sans SC;
 		font-weight: 400;
-		color: #2C2D2D;
+		color: #FFB22B;
 	}
 
 	.driverNameText {
