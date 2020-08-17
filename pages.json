@@ -1266,7 +1266,7 @@
 	},
 	"tabBar": {
 		"color": "#333333",
-		"selectedColor": "#ff9012",
+		"selectedColor": "#62A1F0",
 		"backgroundColor": "#FFFFFF",
 		"borderStyle": "black",
 		//#ifdef APP-PLUS

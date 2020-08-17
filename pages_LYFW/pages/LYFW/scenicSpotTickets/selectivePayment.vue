@@ -612,10 +612,10 @@
 											},
 											header: {'content-type': 'application/json'},
 											success: function(res) {
-												// console.log(res)
+												 console.log(res)
 												if (res.data.msg == '出票成功') {
-													uni.redirectTo({
-														url: '../../../../pages/order/OrderList'
+													uni.switchTab({
+														url:'../../../../pages/order/OrderList'
 													})
 												} else {
 													uni.showToast({
@@ -707,8 +707,8 @@
 										success: function(res) {
 											// console.log(res)
 											if (res.data.msg == '出票成功') {
-												uni.redirectTo({
-													url: '../../../../pages/order/OrderList'
+												uni.switchTab({
+													url:'../../../../pages/order/OrderList'
 												})
 											} else {
 												uni.showToast({
@@ -794,7 +794,7 @@
 									success: function(res) {
 										// console.log(res)
 										if (res.data.msg == '出票成功') {
-											uni.redirectTo({ 
+											uni.switchTab({
 												url:'../../../../pages/order/OrderList'
 											})
 										} else if (res.data.msg == '出票失败') {
@@ -804,8 +804,8 @@
 												duration: 3000
 											})
 										}else if (res.data.msg == '您当前无可出票的订单或该订单已出票') {
-											uni.redirectTo({
-												url: '../../../../pages/order/OrderList'
+											uni.switchTab({
+												url:'../../../../pages/order/OrderList'
 											})
 										}
 									},
