@@ -6,7 +6,7 @@
 		<view class="cover-container">
 			<view class="MP_information1">
 				<view class="MP_title">{{orderInfo.startStaion}} - {{orderInfo.endStation}}</view>
-				<text class="MP_text">费用包含：车票 {{insurance}}</text>
+				<!-- <text class="MP_text">费用包含：车票 {{insurance}}</text> -->
 
 				<view class="MP_selectionDate">
 					<view class="MP_title">发车时间</view>

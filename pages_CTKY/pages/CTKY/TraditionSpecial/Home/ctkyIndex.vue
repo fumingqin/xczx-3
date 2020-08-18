@@ -37,7 +37,9 @@
 				<view class="queryView">
 					<button class="queryButton" @click="queryClick">固定班次查询</button>
 				</view>
-				
+				<view class="queryView2">
+					<button class="queryButton2" @click="queryClick2">议价叫车</button>
+				</view>
 				<view style="justify-content: space-between; align-items: center;display: flex;">
 					<label class="historyTitle">历史记录</label>
 					<!-- <label class="historyText" v-for="(i,index) in historyLines" :key=index v-if="index<3">{{i}}</label> -->
@@ -48,9 +50,9 @@
 				</view>
 			</view>
 			
-			<view class="queryView2">
+			<!-- <view class="queryView2">
 				<button class="queryButton2" @click="queryClick2">议价叫车</button>
-			</view>
+			</view> -->
 		</view>
 	</view>
 </template>
@@ -439,8 +441,9 @@
 	
 	//查询视图
 	.queryView2 {
-		margin-top: 40upx;
-		margin-left: 460upx;
+		margin-top: 20upx;
+		margin-left: 20upx;
+		margin-right: 20upx;
 	}
 	
 	//查询
