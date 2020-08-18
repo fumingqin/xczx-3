@@ -912,8 +912,8 @@
 	.stationContentView {
 		flex-direction: column;
 		background: #FFFFFF;
-		margin: 0 26upx;
-		margin-bottom: 20upx;
+		// margin: 0 26upx;
+		// margin-bottom: 20upx;
 		border-radius: 14upx;
 	}
 

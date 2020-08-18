@@ -1,9 +1,9 @@
 <template>
 	<view class="contentView">
-		<view class="top u-f-jsb" style="background-color: #FC4646; width: 100%; height: 180rpx;">
+		<!-- <view class="top u-f-jsb" style="background-color: #FC4646; width: 100%; height: 180rpx;">
 			<view style="color: #FFFFFF; font-size: 35rpx; margin-left: 20rpx;">{{getCtkyOrderStatus(orderInfo.state)}}</view>
 			<view style="color: #FFFFFF; font-size: 30rpx; margin-right: 20rpx;">￥{{orderInfo.totalPrice}}</view>
-		</view>
+		</view> -->
 		<!-- 头部视图 -->
 		<view class="head">
 			<!-- 起始站/价格 -->
@@ -108,9 +108,9 @@
 				val: '二维码', // 要生成的二维码值
 				size: 300, // 二维码大小
 				unit: 'upx', // 单位
-				background: '#b4e9e2', // 背景色
+				// background: '#b4e9e2', // 背景色
 				// foreground: '#ffffff', // 前景色
-				pdground: '#32dbc6', // 角标色
+				// pdground: '#32dbc6', // 角标色
 				icon: '', // 二维码图标
 				iconsize: 40, // 二维码图标大小
 				lv: 3, // 二维码容错级别 ， 一般不用设置，默认就行
@@ -413,15 +413,15 @@
 	
 	/* 内容 */
 	page,.contentView {
-		background: #F5F9FC;
+		background-color: #F5F9FC;
 		display: block;
 	}
 	/* 头部视图 */
 	.head {
-		background: #FFFFFF;
+		background-color: #FFFFFF;
 		border-radius: 20rpx;
-		margin: 20rpx;
-		margin-top: -40rpx;
+		/* margin: 20rpx; */
+		margin-top: 20rpx;
 		padding: 20rpx 0;
 	}
 	/* 起始站/价格 */
@@ -444,8 +444,8 @@
 	}
 	.infoCotent {
 		border-radius: 20rpx;
-		background: #FFFFFF;
-		margin: 0 20rpx;
+		background-color: #FFFFFF;
+		/* margin: 0 20rpx; */
 		margin-bottom: 20rpx;
 		padding:20rpx 0;
 	}

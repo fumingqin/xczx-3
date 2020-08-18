@@ -23,10 +23,10 @@
 		<view class="ctky_View" v-for="(item,index) in allTicketsList" :key="index" @click="ticketDetail(allTicketsList[index])">
 			<view class="ctky_View_Left">
 				<view style="display: flex;align-items: center;margin:20upx 25upx;">
-					<view class="markType" style="border:#1EA2FF solid 1px;color:#1EA2FF;" v-if="item.shuttleType == '普通班车' && isFlowTickets(item) == '普通'">普通班车</view>
-					<view class="markType" style="border:#FF5A00 solid 1px;color:#ff961e;" v-if="item.shuttleType == '定制班车'">定制班车</view>
-					<view class="busMarkType" style="border:#FF5A00 solid 1px;color:#ff961e;" v-if="item.shuttleType == '定制巴士'">定制巴士</view>
-					<view class="markType" style="border:#1EA2FF solid 1px;color:#1EA2FF;" v-if="item.shuttleType == '普通班车' && isFlowTickets(item) == '流水'">流水</view>
+					<view class="markType" style="color:#1EA2FF;" v-if="item.shuttleType == '普通班车' && isFlowTickets(item) == '普通'">普通班车</view>
+					<view class="markType" style="color:#ff961e;" v-if="item.shuttleType == '定制班车'">定制班车</view>
+					<view class="busMarkType" style="color:#ff961e;" v-if="item.shuttleType == '定制巴士'">定制巴士</view>
+					<view class="markType" style="color:#1EA2FF;" v-if="item.shuttleType == '普通班车' && isFlowTickets(item) == '流水'">流水</view>
 					<view style="margin-left:19upx ;font-family: SourceHanSansSC-Bold;font-weight: bold;">{{turnDate(item.setTime)}}</view>
 				</view>
 				<!-- <view style="display: flex;align-items: center;justify-content: space-between;"> -->
