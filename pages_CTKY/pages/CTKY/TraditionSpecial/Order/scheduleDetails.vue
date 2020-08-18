@@ -903,7 +903,7 @@
 		background: #FFFFFF;
 		// border-radius: 14upx;
 		// margin: 0 26upx;
-		margin-bottom: 20upx;
+		// margin-bottom: 20upx;
 		display: flex;
 		justify-content: space-between;
 	}

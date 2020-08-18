@@ -1,151 +1,55 @@
 <template>
 	<view>
-
-		<!-- 顶部背景 -->
-		<view class="ob_background">
-			<image src="../../../static/LYFW/scenicSpotTickets/addOrder/orderBackground.png" mode="aspectFill"></image>
+		<view style="width: 100%;height: 150rpx;">
+			
 		</view>
-
-		<!-- 门票信息/数量 -->
-		<!-- 命名：MP -->
-		<view class="cover-container">
-			<view class="MP_information1">
-				<view class="MP_title">{{admissionTicket.admissionTicketName}}</view>
-				<text class="MP_text" @click="open2(1)">预订须知 > </text>
-
-				<!-- 嵌套弹框组件popup -->
-				<uni-popup ref="popup1" type="bottom">
-					<view class="boxVlew">
-						<view class="titleView">
-							<text class="Nb_text1">预订须知</text>
-							<text class="Nb_text2 jdticon icon-fork " @click="close(1)"></text>
-						</view>
-						<scroll-view class="noticeBox" scroll-y="ture">
-							<text class="Nb_text3">费用包含</text>
-							<text class="Nb_text4">
-								{{admissionTicket.ticketContain}}
-							</text>
-							<text class="Nb_text3">预订说明</text>
-							<text class="Nb_text4">{{notice.explain}}</text>
-							<text class="Nb_text3">使用方法</text>
-							<text class="Nb_text4">{{notice.way}}</text>
-							<text class="Nb_text3">使用时间</text>
-							<text class="Nb_text4">{{notice.date}}</text>
-							<text class="Nb_text3">免票政策</text>
-							<text class="Nb_text4">{{notice.policy}}</text>
-							<text class="Nb_text3">退改规则</text>
-							<text class="Nb_text4">{{notice.rule}}</text>
-						</scroll-view>
-					</view>
-				</uni-popup>
-
-
-				<view class="MP_selectionDate">
-					<text>使用日期</text>
-					<text class="MP_textDate" @click="open">{{date}}&nbsp;> </text>
-					<text class="MP_textReminder">{{dateReminder}}</text>
-				</view>
-			</view>
-
-			<!-- 购票人信息 -->
-			<view class="MP_information2">
-				<text class="MP_title">购票人信息</text>
-				<text class="MP_text" style="color: #aaa;">请选择预订人，票价会根据人数自动变更</text>
-
-				<view class="MP_userInformation" v-for="(item,index) in addressData" :key="index">
-					<text>{{item.userName}}</text>
-					<text class="Mp_sex">{{item.userSex}}</text>
-					<text class="Mp_square">{{item.userType}}</text>
-					<text class="Mp_square" v-if="item.userDefault == true">本人</text>
-					<text class="Mp_square" v-if="item.userEmergencyContact == true">紧急联系人</text>
-					<text class="Mp_delete  jdticon icon-fork" @click="deleteUser(index)"></text>
-					<text class="Mp_text">身份证：{{item.userCodeNum}}</text>
-					<text class="Mp_text">手机号：{{item.userPhoneNum}}</text>
-				</view>
-
-				<view class="MP_userInformation">
-					<button class="Mp_addTo" type="default" plain="true" @click="choiceUser(0)">添加</button>
-					<button class="Mp_Selection" type="primary" plain="true" @click="choiceUser(1)">选择</button>
-				</view>
-
-			</view>
-
-			<!-- 优惠券 -->
-			<view class="MP_information2" @click="toggleMask('show')">
-				<view class="MP_optionBar">
-					<text class="Mp_title">优惠券</text>
-					<text class="Mp_arrow"> > </text>
-					<text class="Mp_text">{{couponIndex}}</text>
-				</view>
-			</view>
-
-			<!-- 呼出优惠券面板 -->
-			<view class="mask" :class="maskState===0 ? 'none' : maskState===1 ? 'show' : ''" @click="toggleMask">
-				<view class="mask-content" @click.stop.prevent="stopPrevent">
-					<!-- 优惠券页面，仿mt -->
-					<view class="couponTitle">
-						<text class="Co_text1">优惠券</text>
-						<text class="Co_text2" @click="couponReset">不使用优惠券</text>
-					</view>
-
-					<view class="coupon-item" v-for="(item,index) in couponList" :key="index" @click="couponEvent(index)">
-						<view class="con">
-							<view class="left">
-								<text class="title">{{item.couponTitle}}</text>
-								<text class="time">有效期至2019-06-30</text>
-							</view>
-
-							<view class="right">
-								<text class="price">{{item.couponPrice}}</text>
-								<text>满{{item.couponCondition}}可用</text>
-							</view>
-
-							<view class="circle l"></view>
-							<view class="circle r"></view>
-						</view>
-						<text class="tips">限新用户使用</text>
-					</view>
-				</view>
-			</view>
-
-			<view class="MP_information2">
-				<view class="MP_optionBar">
-					<text class="Mp_title">同意游客须知</text>
-					<text class="Mp_textBlue" @click="open2(2)">(点击查看须知)</text>
-					<radio class="Mp_box" value="1" :color="'#01aaef'" :checked="selectedValue===1 ? true : false" @click="Selection"></radio>
-				</view>
-
-				<!-- 嵌套弹框组件popup -->
-				<uni-popup ref="popup2" type="bottom">
-					<view class="boxVlew">
-						<view class="titleView">
-							<text class="Nb_text1">游客须知</text>
-							<text class="Nb_text2 jdticon icon-fork " @click="close(2)"></text>
-						</view>
-						<scroll-view class="noticeBox" scroll-y="ture">
-							<text class="Nb_text4">
-								{{notice.security}}
-							</text>
-						</scroll-view>
-					</view>
-				</uni-popup>
-			</view>
-
-			<!-- 底部 -->
-			<view class="footer">
-				<view class="price-content">
-					<text>实付款</text>
-					<text class="price-tip">￥</text>
-					<text class="price">{{actualPayment}}</text>
-					<text class="people">共{{addressData.length}}人</text>
-				</view>
-
-				<view class="submitChange" enabl :class="{submitColor: selectedValue===1 && addressData.length>0}" @click="submitState">
-					<text class="submit">立即预订</text>
-				</view>
-			</view>
-
+		
+		<view class="tab-item" style="text-align: center;">
+			<text>{{admissionTicket.admissionTicketName}}</text>
 		</view>
+		
+		<view class="tab-item" style="display: flex;flex-direction: row;justify-content: space-between;">
+			<view>
+				<text>使用日期</text>
+			</view>
+			<view>
+				<text class="MP_textDate" @click="open">{{date}}&nbsp;> </text>
+				<text class="MP_textReminder">{{dateReminder}}</text>
+			</view>
+		</view>
+		
+		<view class="tab-item">
+			<view style="display: flex;flex-direction: row;justify-content: space-between;">
+				<view>
+					<text>购票人信息</text>
+				</view>
+				<view>
+					<text @click="choiceUser(1)">选择</text>
+				</view>
+			</view>
+			<view class="MP_userInformation" v-for="(item,index) in addressData" :key="index">
+				<text>{{item.userName}}</text>
+				<text class="Mp_sex">{{item.userSex}}</text>
+				<text class="Mp_delete  jdticon icon-fork" @click="deleteUser(index)"></text>
+				<text class="Mp_text">身份证：{{item.userCodeNum}}</text>
+				<text class="Mp_text">手机号：{{item.userPhoneNum}}</text>
+			</view>
+			
+		</view>
+		<view class="tab-item">
+			<view>
+				<text>实付款</text>
+			</view>
+			<view>
+				<text>
+					￥{{actualPayment}}
+				</text>
+			</view>
+			<view @click="submitState">
+				<text style="color: #DD524D;">立即预订</text>
+			</view>
+		</view>
+		
 		<uni-calendar ref="calendar" :insert="false" :lunar="true" @confirm="confirm"></uni-calendar>
 	</view>
 </template>
@@ -162,7 +66,7 @@
 			return {
 				submissionState: false, //提交状态
 				actualPayment: '', //实际付款
-				selectedValue: 0, //同意须知的选中值
+				selectedValue: 1, //同意须知的选中值
 				dateReminder: '今天', //日期提醒
 				date: currentDate, //默认时间
 				maskState: 0, //优惠券面板显示状态
@@ -188,7 +92,7 @@
 			this.lyfwData();
 		},
 		onShow:function(){
-			this.selectedValue = 0;
+			this.selectedValue = 1;
 			this.getUserInfo();
 			this.userData();
 			this.getCoupons();
@@ -205,7 +109,6 @@
 				uni.getStorage({
 					key:'userInfo',
 					success:(res)=>{
-						console.log(res)
 						this.userInfo = res.data;
 					}
 				})
@@ -778,17 +681,6 @@
 				}
 			},
 
-			//同意购买-点击事件
-			Selection: function() {
-				if (this.selectedValue == 0) {
-					this.selectedValue = 1;
-				} else {
-					this.selectedValue = 0;
-				}
-			},
-
-
-
 
 		}
 	}
@@ -798,6 +690,10 @@
 	page {
 		background: #F5F5F5;
 		padding-bottom: 100upx;
+	}
+	
+	.tab-item{
+		padding: 20rpx;
 	}
 
 	//背景图样式

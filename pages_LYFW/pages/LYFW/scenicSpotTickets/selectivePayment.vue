@@ -1,107 +1,50 @@
 <template>
 	<view>
-		<!-- #ifdef MP-WEIXIN -->
-		<view style="color: #FFFFFF; font-size: 26upx; position: absolute; right: 32upx; z-index: 1; top: 24upx;">倒计时：{{countDownDate}}秒</view>
-		<!-- #endif -->
-		<!-- #ifndef MP-WEIXIN -->
-		<view style="color: #FFFFFF; font-size: 26upx; position: absolute; right: 32upx; z-index: 1; top: 88upx;">倒计时：{{countDownDate}}秒</view>
-		<!-- #endif -->
-
-		<!-- 顶部背景 -->
-		<view class="ob_background">
-			<image src="../../../static/LYFW/scenicSpotTickets/addOrder/orderBackground.png" mode="aspectFill"></image>
+		<view style="width: 100%;height: 150rpx;">
+			
 		</view>
-
-		<view class="cover-container">
-			<view class="MP_information1">
-				<view class="MP_title">{{orderInfo.ticketTitle}}</view>
-				<text class="MP_text">费用包含：{{orderInfo.ticketContain}}</text>
-
-				<view class="MP_selectionDate">
-					<view class="MP_title">使用时间</view>
-					<text class="MP_text">{{orderInfo.orderDate}} &nbsp; 仅限当天</text>
-				</view>
-
-				<view class="MP_selectionDate" :hidden="hiddenValues==0">
-					<view class="MP_title">购票人信息</view>
-					<view class="MP_userInformation" v-for="(item,index) in orderInfo.addressData" :key="index">
+		<view class="tab-item" style="text-align: center;">
+			<text>{{orderInfo.ticketTitle}}</text>
+		</view>
+		
+		<view class="tab-item" style="text-align: center;">
+			<view>
+				<text>使用时间</text>
+			</view>
+			<view>
+				<text>{{orderInfo.orderDate}} &nbsp; 仅限当天</text>
+			</view>
+		</view>
+		
+		<view class="tab-item">
+			<view>
+				<text>购票人信息</text>
+			</view>
+			<view>
+				<view  v-for="(item,index) in orderInfo.addressData" :key="index">
+					<view>
 						<text>{{item.userName}}</text>
-						<text class="Mp_sex">{{item.userSex}}</text>
-						<text class="Mp_square">{{item.userType}}</text>
-						<text class="Mp_square" v-if="item.userDefault == 'true'">本人</text>
-						<text class="Mp_square" v-if="item.userEmergencyContact == 'true'">紧急联系人</text>
-						<text class="Mp_text">身份证：{{(item.userCodeNum.substr(0,6))+'******'+(item.userCodeNum.substr(14,18))}}</text>
-						<text class="Mp_text">手机号：{{(item.userPhoneNum.substr(0,3))+'****'+(item.userPhoneNum.substr(7,11))}}</text>
 					</view>
-				</view>
-
-				<view class="MP_selectionDate" :hidden="hiddenValues==0">
-					<view class="MP_title">费用详情</view>
-					<view class="MP_cost" v-if="adultIndex>=1">
-						<text>成人票</text>
-						<text class="MP_number">×{{adultIndex}}</text>
-						<text class="MP_userCost">¥{{priceAccuracy(adultTotalPrice)}}</text>
+					<view>
+						<text class="">{{item.userSex}}</text>
 					</view>
-
-					<view class="MP_cost" v-if="childrenIndex>=1">
-						<text>儿童票</text>
-						<text class="MP_number">×{{childrenIndex}}</text>
-						<text class="MP_userCost">¥{{priceAccuracy(childrenTotalPrice)}}</text>
+					<view>
+						<text class="">{{item.userType}}</text>
 					</view>
-
-					<!-- 保险 -->
-					<view class="MP_cost" v-if="orderInfo.orderInsure==true">
-						<text>太平洋门票意外险 经济款</text>
-						<text class="MP_number">×{{orderInfo.appUserInfoList.length}}</text>
-						<text class="MP_total">¥{{orderInfo.orderInsurePrice}}</text>
+					<view>
+						<text class="">身份证：{{(item.userCodeNum.substr(0,6))+'******'+(item.userCodeNum.substr(14,18))}}</text>
 					</view>
-
-					<!-- 优惠券 -->
-					<view class="MP_cost" v-if="orderInfo.couponPrice>0">
-						<text>{{orderInfo.couponTitle}}</text>
-						<text class="MP_number">×1</text>
-						<text class="MP_total">-&nbsp;¥{{orderInfo.couponPrice}}</text>
+					<view>
+						<text class="">手机号：{{(item.userPhoneNum.substr(0,3))+'****'+(item.userPhoneNum.substr(7,11))}}</text>
 					</view>
-
-
-					<view class="MP_cost">
-						<text class="MP_total">共计&nbsp;¥{{orderInfo.orderActualPayment}}</text>
-					</view>
-
-				</view>
-
-				<view class="jdticon icon-xia" style="padding: 24upx 0upx; text-align: center; margin-top: 64upx;" @click="hide(0)"
-				 :hidden="hiddenValues==1"></view>
-				<view class="jdticon icon-shang" style="padding: 24upx 0upx; text-align: center; margin-top: 64upx;" @click="hide(1)"
-				 :hidden="hiddenValues==0"></view>
-
-			</view>
-
-			<view class="MP_information2">
-				<view class="MP_optionBar">
-					<text class="Mp-icon jdticon icon-weixinzhifu"></text>
-					<text class="Mp_title">微信</text>
-					<radio class="Mp_box" :checked="channeIndex===0" :color="'#36cb59'" @click="Selection"></radio>
 				</view>
 			</view>
-
-			<!-- #ifndef H5 -->
-			<!-- <view class="MP_information2">
-				<view class="MP_optionBar">
-					<text class="Mp-icon jdticon icon-alipay"></text>
-					<text class="Mp_title">支付宝</text>
-					<radio class="Mp_box" :checked="channeIndex===1" :color="'#01aaef'" @click="Selection"></radio>
-				</view>
-			</view> -->
-			<!-- #endif -->
-
-
-			<view class="MP_information3" @click="paymentSatas">
-				支付{{orderInfo.orderActualPayment}}元
-			</view>
-
 		</view>
-
+		
+		<view class="tab-item" @click="paymentSatas">
+			<text style="color: #DD524D;">支付</text>
+		</view>
+		
 	</view>
 </template>
 
@@ -457,7 +400,7 @@
 												// console.log(res)
 												if (res.data.msg == '出票成功') {
 													uni.redirectTo({
-														url: 'successfulPayment'
+														url: '../../../../pages/order/OrderList'
 													})
 												} else {
 													uni.showToast({
@@ -571,7 +514,7 @@
 												// console.log(res)
 												if (res.data.msg == '出票成功') {
 													uni.redirectTo({
-														url: 'successfulPayment'
+														url: '../../../../pages/order/OrderList'
 													})
 												} else {
 													uni.showToast({
@@ -659,6 +602,7 @@
 								provider: 'wxpay',
 								orderInfo: e.data.data,
 								success: function(res) {
+									console.log(res);
 									if(res.errMsg == 'requestPayment:ok'){
 										uni.request({
 											url:$lyfw.Interface.spt_RequestTickets.value,
@@ -668,10 +612,10 @@
 											},
 											header: {'content-type': 'application/json'},
 											success: function(res) {
-												// console.log(res)
+												 console.log(res)
 												if (res.data.msg == '出票成功') {
-													uni.redirectTo({
-														url: 'successfulPayment'
+													uni.switchTab({
+														url:'../../../../pages/order/OrderList'
 													})
 												} else {
 													uni.showToast({
@@ -693,7 +637,7 @@
 								},
 					
 								fail: function(e) {
-									// console.log(e)
+									 console.log(e)
 									if (e.errMsg == 'requestPayment:fail canceled') {
 										uni.showToast({
 											title: '您放弃了支付',
@@ -763,8 +707,8 @@
 										success: function(res) {
 											// console.log(res)
 											if (res.data.msg == '出票成功') {
-												uni.redirectTo({
-													url: 'successfulPayment'
+												uni.switchTab({
+													url:'../../../../pages/order/OrderList'
 												})
 											} else {
 												uni.showToast({
@@ -850,8 +794,8 @@
 									success: function(res) {
 										// console.log(res)
 										if (res.data.msg == '出票成功') {
-											uni.redirectTo({ 
-												url:'successfulPayment'
+											uni.switchTab({
+												url:'../../../../pages/order/OrderList'
 											})
 										} else if (res.data.msg == '出票失败') {
 											uni.showToast({
@@ -860,8 +804,8 @@
 												duration: 3000
 											})
 										}else if (res.data.msg == '您当前无可出票的订单或该订单已出票') {
-											uni.redirectTo({
-												url: 'successfulPayment'
+											uni.switchTab({
+												url:'../../../../pages/order/OrderList'
 											})
 										}
 									},
