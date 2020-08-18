@@ -1,16 +1,16 @@
 <template>
 	<view>
 		<view v-if="applyName=='南平综合出行'">
-			
+
 			<view style="margin-top: 80rpx;">
-				<view class="tab-item" @click="godetail('/pages_CTKY/pages/CTKY/TraditionSpecial/Home/ctkyIndex')" >
+				<view class="tab-item" @click="godetail('/pages_CTKY/pages/CTKY/TraditionSpecial/Home/ctkyIndex')">
 					<text>村村通</text>
 				</view>
-				<view class="tab-item" @click="godetail('../../pages_LYFW/pages/LYFW/scenicSpotTickets/ticketsList')" >
+				<view class="tab-item" @click="godetail('../../pages_LYFW/pages/LYFW/scenicSpotTickets/ticketsList')">
 					<text>景区门票</text>
 				</view>
 			</view>
-			
+
 		</view>
 
 		<!-- 新闻资讯 -->
@@ -237,7 +237,7 @@
 			const value = uni.getStorageSync('launchFlag');
 			console.log(value)
 			if (value !== true) {
-				uni.setStorage({
+				/* uni.setStorage({
 					key: 'launchFlag',
 					data: true,
 					success: function() {
@@ -245,7 +245,7 @@
 							url: 'guidePage'
 						})
 					}
-				})
+				}) */
 			}
 			// #endif
 			// var a = this.$oSit.Interface.address.Url;
@@ -622,8 +622,8 @@
 									url: that.$GrzxInter.Interface.GetUserInfoByOpenId_wx.value,
 									data: {
 										openid: openid,
-										systemname:that.$GrzxInter.systemConfig.appName,//应用名称
-										openidtype:that.$GrzxInter.systemConfig.openidtype,//应用类型
+										systemname: that.$GrzxInter.systemConfig.appName, //应用名称
+										openidtype: that.$GrzxInter.systemConfig.openidtype, //应用类型
 									},
 									method: that.$GrzxInter.Interface.GetUserInfoByOpenId_wx.method,
 									success(res1) {
@@ -886,14 +886,14 @@
 	page {
 		background-color: #f6f6f6;
 	}
-	
-	.tab-item{
+
+	.tab-item {
 		padding: 20rpx;
 		text-align: center;
 		border-bottom: #000000 1px solid;
 	}
-	
-	
+
+
 	.swiper-container {
 		pointer-events: none;
 	}
