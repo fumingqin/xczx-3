@@ -35,12 +35,12 @@
 				<mx-date-picker :show="showPicker" :type="type" :value="value" :show-tips="true" :begin-text="'入住'" :end-text="'离店'"
 				 :show-seconds="true" @confirm="onSelected" @cancel="onSelected" />
 				<view class="queryView">
-					<button class="queryButton" @click="queryClick">固定班次查询</button>
+					<button class="queryButton" @click="queryClick">班次查询</button>
 				</view>
-				<view class="queryView2">
+				<!-- <view class="queryView2">
 					<button class="queryButton2" @click="queryClick2">议价叫车</button>
-				</view>
-				<view style="justify-content: space-between; align-items: center;display: flex;">
+				</view> -->
+				<view style="justify-content: space-between; align-items: center;display: flex;" v-if="false">
 					<label class="historyTitle">历史记录</label>
 					<!-- <label class="historyText" v-for="(i,index) in historyLines" :key=index v-if="index<3">{{i}}</label> -->
 					<label class="clearHistory" @click="clickHistory">清除历史</label>

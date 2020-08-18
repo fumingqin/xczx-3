@@ -13,7 +13,7 @@
 					<text class="MP_text">{{turnDate(orderInfo.setTime)}}</text>
 				</view>
 
-				<view class="MP_selectionDate" :hidden="hiddenValues==0">
+				<view class="MP_selectionDate" :hidden="hiddenValues==0" v-if="false">
 					<view class="MP_title">乘客信息</view>
 					<view class="MP_userInformation" v-for="(item,index) in passengerInfo" :key="index">
 						<text>{{item.userName}}</text>
@@ -477,7 +477,7 @@
 										that.paymentData = msgArray;
 										uni.hideLoading();
 										uni.showModal({
-											content: '请在2分钟内完成支付',
+											content: '请尽快完成支付',
 											success(res) {
 												console.log('确认',res)
 												if(res.confirm == true) {

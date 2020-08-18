@@ -1,11 +1,11 @@
 <template>
 	<view>
 		<!-- 顶部搜索框 -->
-		<view class="topSerchView">
+		<!-- <view class="topSerchView">
 			<view class="SearchBar" elevation='5px' style="">
 				<input class="addressInput" @input="onInput" placeholder="请输入关键字搜索" />
 			</view>
-		</view>
+		</view> -->
 		<!-- 搜索列表 -->
 		<view class="stationList" :style="{ 'height':scrollHeight }" v-if="isShowList">
 			<block v-for="(item,index) in keywordList" :key="index">
@@ -17,11 +17,11 @@
 		<!-- 联动列表 -->
 		<view class="list_box" v-if="isShowAllList">
 			<!-- 左边的列表 -->
-			<view class="left">
+			<!-- <view class="left">
 				<scroll-view scroll-y="true" :style="{ 'height':scrollHeight }">
 					<view class="item" style="background-color: #FFFFFF;color: #42b983;">南平</view>
 		        </scroll-view>
-			</view>
+			</view> -->
 			<!-- 右边的列表 -->
 			<view class="main" v-if="isShowAllList">
 				<swiper class="swiper" :style="{ 'height':scrollHeight }" :current="leftIndex" @change="swiperChange" vertical="true"

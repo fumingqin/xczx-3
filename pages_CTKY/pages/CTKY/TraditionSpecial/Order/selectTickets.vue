@@ -22,13 +22,13 @@
 		<!-- 车票内容部分 -->
 		<view class="ctky_View" v-for="(item,index) in allTicketsList" :key="index" @click="ticketDetail(allTicketsList[index])">
 			<view class="ctky_View_Left">
-				<view style="display: flex;align-items: center;margin:20upx 25upx;">
+				<!-- <view style="display: flex;align-items: center;margin:20upx 25upx;">
 					<view class="markType" style="color:#1EA2FF;" v-if="item.shuttleType == '普通班车' && isFlowTickets(item) == '普通'">普通班车</view>
 					<view class="markType" style="color:#ff961e;" v-if="item.shuttleType == '定制班车'">定制班车</view>
 					<view class="busMarkType" style="color:#ff961e;" v-if="item.shuttleType == '定制巴士'">定制巴士</view>
 					<view class="markType" style="color:#1EA2FF;" v-if="item.shuttleType == '普通班车' && isFlowTickets(item) == '流水'">流水</view>
 					<view style="margin-left:19upx ;font-family: SourceHanSansSC-Bold;font-weight: bold;">{{turnDate(item.setTime)}}</view>
-				</view>
+				</view> -->
 				<!-- <view style="display: flex;align-items: center;justify-content: space-between;"> -->
 				<!-- 班次：{{getScheduleNum(item)}} 这里没有班次信息，暂时不显示 -->
 				<!-- <view v-if="item.shuttleType != '定制巴士'" style="margin-left: 25upx;font-size: 30upx;font-style:SourceHanSansSC-Regular ;
@@ -37,7 +37,7 @@
 				<view style="margin-left: 24upx;margin-bottom: 16upx;font-size: 30upx;font-style:SourceHanSansSC-Regular ;color: #333333;">线路:{{item.lineName}}</view>
 				<view style="margin-left: 24upx;display: flex;align-items: center;margin-bottom: 16upx;justify-content: space-between;">
 					<view style="display: flex;align-items: center;">
-						<image src="../../../../static/CTKY/startDot.png" style="width: 10upx ;height: 10upx;"></image>
+						<!-- <image src="../../../../static/CTKY/startDot.png" style="width: 10upx ;height: 10upx;"></image> -->
 						<view style="margin-left: 16upx; font-size: 30upx;font-style:SourceHanSansSC-Regular ;
 						color: #333333;">{{item.startStaion}}</view>
 					</view>
@@ -50,7 +50,7 @@
 				</view>
 				<view style="margin-left: 25upx;display: flex;align-items: center;margin-bottom: 16upx;justify-content: space-between;">
 					<view style="display: flex;align-items: center;">
-						<image src="../../../../static/CTKY/endDot.png" style="width: 10upx ;height: 10upx;"></image>
+						<!-- <image src="../../../../static/CTKY/endDot.png" style="width: 10upx ;height: 10upx;"></image> -->
 						<view style="margin-left: 16upx;font-size: 30upx;font-style:SourceHanSansSC-Regular ;
 						color: #333333;">{{item.endStation}}</view>
 					</view>
