@@ -383,7 +383,7 @@
 							</view>
 						</view>
 					</view>
-					<empty-data :isShow="info.length==0" text="暂无数据" :image="noDataImage" textColor="#999999"></empty-data>
+					<!-- <empty-data :isShow="info.length==0" text="暂无数据" :image="noDataImage" textColor="#999999"></empty-data> -->
 				</view>
 
 
@@ -630,7 +630,7 @@
 								</view>
 							</view>
 						</view>
-						<empty-data :isShow="finishArr.length == 0" text="暂无数据" :image="noDataImage" textColor="#999999"></empty-data>
+						<!-- <empty-data :isShow="finishArr.length == 0" text="暂无数据" :image="noDataImage" textColor="#999999"></empty-data> -->
 					</view>
 
 			<!-- 进行中 -->
@@ -915,7 +915,7 @@
 								</view>
 							</view>
 						</view>
-						<empty-data :isShow="goingArr.length == 0" text="暂无数据" :image="noDataImage" textColor="#999999"></empty-data>
+						<!-- <empty-data :isShow="goingArr.length == 0" text="暂无数据" :image="noDataImage" textColor="#999999"></empty-data> -->
 					</view>
 
 			<!-- 未支付 -->
@@ -1175,7 +1175,7 @@
 								</view>
 							</view>
 						</view>
-						<empty-data :isShow="unfinishArr.length == 0" text="暂无数据" :image="noDataImage" textColor="#999999"></empty-data>
+						<!-- <empty-data :isShow="unfinishArr.length == 0" text="暂无数据" :image="noDataImage" textColor="#999999"></empty-data> -->
 					</view>
 
 			<!-- 已取消 -->
@@ -1468,7 +1468,7 @@
 									</view>
 								</view>
 							</view>
-							<empty-data :isShow="cancelArr.length == 0" text="暂无数据" :image="noDataImage" textColor="#999999"></empty-data>
+							<!-- <empty-data :isShow="cancelArr.length == 0" text="暂无数据" :image="noDataImage" textColor="#999999"></empty-data> -->
 						</view>
 					</view>
 
@@ -1713,7 +1713,7 @@
 		onLoad: function() {
 			var that = this;
 			//获取客运弹框图片
-			that.getPicture();
+			// that.getPicture();
 			//读取用户ID
 			uni.getStorage({
 				key: 'userInfo',
