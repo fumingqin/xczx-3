@@ -48,7 +48,7 @@
 
 			<!-- 上下车点选择,0是普通购票不显示上下车点选择 -->
 			<!-- v-if="ticketDetail.shuttleType == '定制班车'" -->
-			<view class="stationContentView" v-if="ticketDetail.shuttleType == '普通班车'">
+			<!-- <view class="stationContentView" v-if="ticketDetail.shuttleType == '普通班车'">
 				<view class="boarding" @tap="endStationTap2">
 					<view style="margin-top: 35upx;margin-bottom: 35upx;font-size:SourceHanSansSC-Regular ;color: #2C2D2D;font-size: 30upx;">下车点</view>
 					<view style="display: flex;align-items: center;">
@@ -56,11 +56,11 @@
 						<image src="../../../../static/CTKY/right.png" style="width: 11upx;height: 21upx;margin-left: 10upx;"></image>
 					</view>
 				</view>
-			</view>
+			</view> -->
 
 			<!-- 上下车点选择,0是普通购票不显示上下车点选择 -->
 			<!-- v-if="ticketDetail.shuttleType == '定制班车'" -->
-			<view class="stationContentView" v-if="ticketDetail.shuttleType == '定制班车'">
+			<!-- <view class="stationContentView" v-if="ticketDetail.shuttleType == '定制班车'">
 				<view class="boarding" style="border-bottom:#EAEAEA solid 1px;" @tap="startStationTap">
 					<view style="margin-top: 35upx;margin-bottom: 35upx;font-size:SourceHanSansSC-Regular ;color: #2C2D2D;font-size: 30upx;">上车点</view>
 					<view style="display: flex;align-items: center;">
@@ -75,7 +75,7 @@
 						<image src="../../../../static/CTKY/right.png" style="width: 11upx;height: 21upx;margin-left: 10upx;"></image>
 					</view>
 				</view>
-			</view>
+			</view> -->
 
 			<!-- 乘车人信息 -->
 			<view class="orderCommonClass" style="flex-direction: column;padding-bottom: 25upx;">
@@ -718,56 +718,20 @@
 				// 	that.startStation = " "
 				// 	that.endStation = " "
 				// }
-				//当选中用户须知且选择了上下车点和乘客之后发送请求
-				if (that.ticketDetail.starSiteArr.length > 2 || that.ticketDetail.endSiteArr.length > 2) {
-					if (that.startStation == '请选择上车点' && that.endStation == '请选择下车点') {
-						uni.showToast({
-							title: '未选择上下车点，请选择上下车点',
-							icon: 'none'
-						})
-					} else if (that.passengerInfo.length == 0) {
-						uni.showToast({
-							title: '请选择乘车人',
-							icon: 'none'
-						})
-					} else if (that.adultNum == 0) {
-						uni.showToast({
-							title: '免童/儿童不可单独购票',
-							icon: 'none'
-						})
-					} else if (that.selectedValue == 0) {
-						uni.showToast({
-							title: '请同意购买须知',
-							icon: 'none'
-						})
-					} else {
-						that.jumpTo();
-					}
+				if (that.passengerInfo.length == 0) {
+					uni.showToast({
+						title: '请选择乘车人',
+						icon: 'none'
+					})
+				} else if (that.selectedValue == 0) {
+					uni.showToast({
+						title: '请同意购买须知',
+						icon: 'none'
+					})
 				} else {
-					if (that.endStation == '请选择下车点') {
-						uni.showToast({
-							title: '未选择下车点，请选择下车点',
-							icon: 'none'
-						})
-					} else if (that.passengerInfo.length == 0) {
-						uni.showToast({
-							title: '请选择乘车人',
-							icon: 'none'
-						})
-					} else if (that.adultNum == 0) {
-						uni.showToast({
-							title: '免童/儿童不可单独购票',
-							icon: 'none'
-						})
-					} else if (that.selectedValue == 0) {
-						uni.showToast({
-							title: '请同意购买须知',
-							icon: 'none'
-						})
-					} else {
-						that.jumpTo();
-					}
+					that.jumpTo();
 				}
+				
 			},
 			//-----------------------------------跳转-----------------------------------
 			jumpTo() {
