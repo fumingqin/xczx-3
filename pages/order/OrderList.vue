@@ -4736,8 +4736,8 @@
 
 			// 按钮
 			.at_button {
-				padding: 18upx 30upx;
-				font-size: 36upx;
+				padding: 18upx 24upx;
+				font-size: 34upx;
 				border-radius: 10upx;
 			}
 
