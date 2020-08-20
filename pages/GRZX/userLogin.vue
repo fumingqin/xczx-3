@@ -23,7 +23,6 @@
 		</view>
 
 		<!-- logo -->
-		<image src="../../static/GRZX/logo.png" class="logoClass"></image>
 	</view>
 </template>
 
